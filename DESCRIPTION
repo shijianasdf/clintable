@@ -5,7 +5,7 @@ Authors@R:
     person(given = "Daniel D.",
            family = "Sjoberg",
            role = c("aut", "cre"),
-           email = "danieldsjoberg@gmail.com")
+           email = "danield.sjoberg@gmail.com")
 Description: The gtsummary package creates
     presentation-ready tables summarizing data sets, regression models,
     and more. The code to create the tables is concise and highly
