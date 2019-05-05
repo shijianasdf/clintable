@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutorial: fmt_regression • clintable</title>
+<title>Tutorial: fmt_regression • gtsummary</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">clintable</a>
+        <a class="navbar-link" href="../index.html">gtsummary</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -115,7 +115,7 @@ marker   Marker Level, ng/mL
 stage    T Stage
 grade    Grade
 response Tumor Response</code></pre>
-<p>The default output from <code><a href="../reference/fmt_regression.html">fmt_regression()</a></code> is meant to be publication ready. Let’s start by creating a regression model table from the <code>trial</code> data set included in the <code>clintable</code> package. We will predict tumor response using age, stage, and grade using a logistic regression model.</p>
+<p>The default output from <code><a href="../reference/fmt_regression.html">fmt_regression()</a></code> is meant to be publication ready. Let’s start by creating a regression model table from the <code>trial</code> data set included in the <code>gtsummary</code> package. We will predict tumor response using age, stage, and grade using a logistic regression model.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># build logistic regression model</span></a>
 <a class="sourceLine" id="cb3-2" title="2">m1 =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/glm">glm</a></span>(response <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>stage <span class="op">+</span><span class="st"> </span>grade, trial, <span class="dt">family =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/family">binomial</a></span>(<span class="dt">link =</span> <span class="st">"logit"</span>))</a>
 <a class="sourceLine" id="cb3-3" title="3"></a>
@@ -600,9 +600,9 @@ response Tumor Response</code></pre>
 </blockquote>
 <p>If you’re printing results from a categorical variable, include the desired level after the variable name, e.g. <code><a href="../reference/inline_text.html">inline_text(fmt_m1, "stage:T3")</a></code> resolves to “0.65 (95% CI 0.26, 1.58; p=0.3)”.</p>
 </div>
-<div id="clintable-kableextra" class="section level2">
+<div id="gtsummary-kableextra" class="section level2">
 <h2 class="hasAnchor">
-<a href="#clintable-kableextra" class="anchor"></a>clintable + kableExtra</h2>
+<a href="#gtsummary-kableextra" class="anchor"></a>gtsummary + kableExtra</h2>
 <p>Remember how the results are stored in a data frame? Need that data frame for any reason (e.g. if you want to get extra fancy with <code>kableExtra</code>)? Use generic function as_tibble to extract an easy-to-use data frame from any fmt_regression object.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co">#make data frame out of fmt_regression object</span></a>
 <a class="sourceLine" id="cb10-2" title="2">mod1_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/as_tibble.html">as_tibble</a></span>(fmt_m1)</a></code></pre></div>
@@ -900,8 +900,8 @@ III
 <a class="sourceLine" id="cb13-78" title="78"><span class="co">#&gt;         sprintf("%.0f", x), abs(x) &gt;= 10 ~ sprintf("%.1f", x), </span></a>
 <a class="sourceLine" id="cb13-79" title="79"><span class="co">#&gt;         TRUE ~ sprintf("%.2f", x))</span></a>
 <a class="sourceLine" id="cb13-80" title="80"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb13-81" title="81"><span class="co">#&gt; &lt;bytecode: 0x000000001c8749a8&gt;</span></a>
-<a class="sourceLine" id="cb13-82" title="82"><span class="co">#&gt; &lt;environment: namespace:clintable&gt;</span></a>
+<a class="sourceLine" id="cb13-81" title="81"><span class="co">#&gt; &lt;bytecode: 0x000000001905f9c0&gt;</span></a>
+<a class="sourceLine" id="cb13-82" title="82"><span class="co">#&gt; &lt;environment: namespace:gtsummary&gt;</span></a>
 <a class="sourceLine" id="cb13-83" title="83"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb13-84" title="84"><span class="co">#&gt; $pvalue_fun</span></a>
 <a class="sourceLine" id="cb13-85" title="85"><span class="co">#&gt; function (x, digits = 1, prepend_p = FALSE) </span></a>
@@ -926,8 +926,8 @@ III
 <a class="sourceLine" id="cb13-104" title="104"><span class="co">#&gt;     }</span></a>
 <a class="sourceLine" id="cb13-105" title="105"><span class="co">#&gt;     return(p_fmt)</span></a>
 <a class="sourceLine" id="cb13-106" title="106"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb13-107" title="107"><span class="co">#&gt; &lt;bytecode: 0x000000001c87b150&gt;</span></a>
-<a class="sourceLine" id="cb13-108" title="108"><span class="co">#&gt; &lt;environment: namespace:clintable&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-107" title="107"><span class="co">#&gt; &lt;bytecode: 0x0000000019068088&gt;</span></a>
+<a class="sourceLine" id="cb13-108" title="108"><span class="co">#&gt; &lt;environment: namespace:gtsummary&gt;</span></a></code></pre></div>
 </div>
 <div id="fmt_uni_regression" class="section level2">
 <h2 class="hasAnchor">
@@ -1237,7 +1237,7 @@ III
       <li><a href="#format-model-results">Format Model Results</a></li>
       <li><a href="#modify-header">Modify Header</a></li>
       <li><a href="#report-results-inline">Report Results Inline</a></li>
-      <li><a href="#clintable-kableextra">clintable + kableExtra</a></li>
+      <li><a href="#gtsummary-kableextra">gtsummary + kableExtra</a></li>
       <li><a href="#under-the-hood">Under the Hood</a></li>
       <li><a href="#fmt_uni_regression">fmt_uni_regression</a></li>
       </ul>

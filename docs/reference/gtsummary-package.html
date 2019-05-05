@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Adds the global p-value for a categorical variables in <code>fmt_regression</code> objects — add_global.fmt_regression • gtsummary</title>
+<title>gtsummary: Presentation-ready Data Summary Tables — gtsummary-package • gtsummary</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,14 @@
 
 
 
-<meta property="og:title" content="Adds the global p-value for a categorical variables in <code>fmt_regression</code> objects — add_global.fmt_regression" />
+<meta property="og:title" content="gtsummary: Presentation-ready Data Summary Tables — gtsummary-package" />
 
-<meta property="og:description" content="This function uses Anova from the car package with type = &quot;III&quot; to calculate global p-values." />
+<meta property="og:description" content="The gtsummary package creates
+    presentation-ready tables summarizing data sets, regression models,
+    and more. The code to create the tables is concise and highly
+    customizable. Data frames can be summarized with many functions.
+    Regression models are summarized including the reference row for
+    categorical independent variables." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,66 +122,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Adds the global p-value for a categorical variables in <code>fmt_regression</code> objects</h1>
+    <h1>gtsummary: Presentation-ready Data Summary Tables</h1>
     
-    <div class="hidden name"><code>add_global.fmt_regression.Rd</code></div>
+    <div class="hidden name"><code>gtsummary-package.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function uses <code><a href='https://www.rdocumentation.org/packages/car/topics/Anova'>Anova</a></code> from the <code>car</code> package with <code>type = "III"</code> to calculate global p-values.</p>
+    <p>The gtsummary package creates
+    presentation-ready tables summarizing data sets, regression models,
+    and more. The code to create the tables is concise and highly
+    customizable. Data frames can be summarized with many functions.
+    Regression models are summarized including the reference row for
+    categorical independent variables.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for fmt_regression</span>
-<span class='fu'><a href='add_global.html'>add_global</a></span>(<span class='no'>x</span>, <span class='kw'>terms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>keep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>object with class <code>fmt_regression</code> from the <code><a href='fmt_regression.html'>fmt_regression</a></code> function</p></td>
-    </tr>
-    <tr>
-      <th>terms</th>
-      <td><p>Character vector of terms for which to add global p-values.  Default
-is <code>NULL</code> which will add global p-values for all categorical variables</p></td>
-    </tr>
-    <tr>
-      <th>keep</th>
-      <td><p>logical argument whether to keep the individual p-values for the
-levels of the categorical variable. Default is <code>FALSE</code></p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>arguments to be passed to <code><a href='https://www.rdocumentation.org/packages/car/topics/Anova'>Anova</a></code>.  Adding <code>test.statistic = </code>
-can change the type of test (e.g. Likelihood-ratio, Wald, etc.).</p></td>
-    </tr>
-    </table>
-    
+        
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>marker</span> ~ <span class='no'>stage</span> + <span class='no'>grade</span>, <span class='no'>trial</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='fmt_regression.html'>fmt_regression</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='add_global.html'>add_global</a></span>()</div><div class='output co'>#&gt; 
-#&gt; N = 192     Coefficient 95% CI      p-value    
-#&gt; T Stage                             &gt;0.9       
-#&gt; T1          Ref.                               
-#&gt; T2          0.06        -0.29, 0.41            
-#&gt; T3          0.11        -0.25, 0.48            
-#&gt; T4          0.09        -0.25, 0.43            
-#&gt; Grade                               0.6        
-#&gt; I           Ref.                               
-#&gt; II          0.17        -0.15, 0.48            
-#&gt; III         0.08        -0.22, 0.37            </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
+    <h2>Author</h2>
+    <p><strong>Maintainer</strong>: Daniel D. Sjoberg <a href='mailto:danieldsjoberg@gmail.com'>danieldsjoberg@gmail.com</a></p>
   </div>
 </div>
 
