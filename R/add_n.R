@@ -19,10 +19,10 @@ add_n <- function(x, missing = FALSE, last = FALSE) {
     counts <-
       x$meta_data %>%
       dplyr::select(c(".variable")) %>%
-      dplyr::mutate_(
-        row_type = ~"label",
-        N = ~ purrr::map_chr(
-          .variable,
+      dplyr::mutate(
+        row_type = "label",
+        N = purrr::map_chr(
+          .data$.variable,
           ~ (nrow(x$inputs$data) - (x$inputs$data[[.x]] %>% is.na() %>% sum())) %>% as.character()
         )
       )
@@ -33,10 +33,10 @@ add_n <- function(x, missing = FALSE, last = FALSE) {
     counts <-
       x$meta_data %>%
       dplyr::select(c(".variable")) %>%
-      dplyr::mutate_(
-        row_type = ~"label",
-        N_missing = ~ purrr::map_chr(
-          .variable,
+      dplyr::mutate(
+        row_type = "label",
+        N_missing = purrr::map_chr(
+          .data$.variable,
           ~ x$inputs$data[[.x]] %>% is.na() %>% sum() %>% as.character()
         )
       )
@@ -66,8 +66,8 @@ add_n <- function(x, missing = FALSE, last = FALSE) {
 
   # stacking header onto counts (and adding header row_type)
   counts <- header %>%
-    dplyr::mutate_(
-      row_type = ~ paste0("header", dplyr::n():1)
+    dplyr::mutate(
+      row_type = paste0("header", dplyr::n():1)
     ) %>%
     dplyr::bind_rows(counts)
 

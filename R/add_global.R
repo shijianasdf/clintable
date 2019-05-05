@@ -70,7 +70,7 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
   global_p <- global_p %>%
     dplyr::mutate(
       row_type = "label",
-      global_pvalue = x$inputs$pvalue_fun(global_pvalue_exact),
+      global_pvalue = x$inputs$pvalue_fun(.data$global_pvalue_exact),
       global_p_pvalue = dplyr::case_when(
         is.na(.data$global_pvalue) ~ NA_character_,
         stringr::str_sub(.data$global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", .data$global_pvalue),
@@ -101,9 +101,9 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
         by = "variable"
       ) %>%
       dplyr::mutate(
-        pvalue_exact = ifelse(row_type == "level" & !is.na(.data$global_pvalue), NA, .data$pvalue_exact),
-        pvalue = ifelse(row_type == "level" & !is.na(.data$global_pvalue), NA, .data$pvalue),
-        p_pvalue = ifelse(row_type == "level" & !is.na(.data$global_pvalue), NA, .data$p_pvalue)
+        pvalue_exact = ifelse(.data$row_type == "level" & !is.na(.data$global_pvalue), NA, .data$pvalue_exact),
+        pvalue = ifelse(.data$row_type == "level" & !is.na(.data$global_pvalue), NA, .data$pvalue),
+        p_pvalue = ifelse(.data$row_type == "level" & !is.na(.data$global_pvalue), NA, .data$p_pvalue)
       ) %>%
       dplyr::select(-dplyr::one_of("global_pvalue"))
   }
@@ -145,7 +145,7 @@ add_global.fmt_uni_regression <- function(x, ...) {
         purrr::set_names(c("variable", "global_pvalue_exact"))
     ) %>%
     dplyr::mutate(
-      global_pvalue = x$inputs$pvalue_fun(global_pvalue_exact),
+      global_pvalue = x$inputs$pvalue_fun(.data$global_pvalue_exact),
       global_p_pvalue = dplyr::case_when(
         is.na(.data$global_pvalue) ~ NA_character_,
         stringr::str_sub(.data$global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", .data$global_pvalue),

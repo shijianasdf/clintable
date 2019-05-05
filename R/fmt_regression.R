@@ -65,11 +65,11 @@ fmt_regression <- function(x, exponentiate = FALSE, label = NULL,
   # putting all results into tibble
   raw_results <-
     tibble::tibble(variable = names(mod_list)) %>%
-    dplyr::mutate_(
-      estimates = ~mod_list,
-      var_type = ~ purrr::map_chr(estimates, ~ ifelse(nrow(.x) > 1, "categorical", "continuous")),
-      var_label = ~ purrr::map_chr(
-        variable, ~ label[[.x]] %||% attr(stats::model.frame(x)[[.x]], "label") %||% .x
+    dplyr::mutate(
+      estimates = mod_list,
+      var_type = purrr::map_chr(.data$estimates, ~ ifelse(nrow(.x) > 1, "categorical", "continuous")),
+      var_label = purrr::map_chr(
+        .data$variable, ~ label[[.x]] %||% attr(stats::model.frame(x)[[.x]], "label") %||% .x
       )
     )
 
@@ -79,15 +79,15 @@ fmt_regression <- function(x, exponentiate = FALSE, label = NULL,
   # formatting raw results
   model_tbl <-
     raw_results %>%
-    dplyr::mutate_(
+    dplyr::mutate(
       # formatting stats
-      estimates = ~ purrr::map(estimates, ~ fmt_estimates(.x, beta_fun, pvalue_fun)),
+      estimates = purrr::map(.data$estimates, ~ fmt_estimates(.x, beta_fun, pvalue_fun)),
       # adding label
-      estimates = ~ purrr::pmap(
-        list(var_type, estimates, var_label, variable),
+      estimates = purrr::pmap(
+        list(.data$var_type, .data$estimates, .data$var_label, .data$variable),
         ~ add_label(..1, ..2, ..3, ..4)
       ),
-      N = ~n
+      N = n
     ) %>%
     tidyr::unnest_("estimates")
 
@@ -123,13 +123,13 @@ fmt_regression <- function(x, exponentiate = FALSE, label = NULL,
 # But for categorical, we add a row on top with the label
 add_label <- function(var_type, estimates, var_label, variable) {
   dplyr::case_when(
-    var_type == "continuous" ~ list(estimates %>% dplyr::mutate_(row_type = ~"label", label = ~var_label)),
+    var_type == "continuous" ~ list(estimates %>% dplyr::mutate(row_type = "label", label = var_label)),
     var_type == "categorical" ~ list(
       dplyr::bind_rows(
         tibble::tibble(row_type = "label", label = var_label),
-        estimates %>% dplyr::mutate_(
-          row_type = ~"level",
-          label = ~ stringr::str_replace(term, stringr::fixed(variable), "")
+        estimates %>% dplyr::mutate(
+          row_type = "level",
+          label = stringr::str_replace(term, stringr::fixed(variable), "")
         )
       )
     )
@@ -141,17 +141,17 @@ add_label <- function(var_type, estimates, var_label, variable) {
 # and add "Ref." for a reference categorical variable
 fmt_estimates <- function(x, beta_fun, pvalue_fun) {
   x %>%
-    dplyr::mutate_(
-      est = ~ ifelse(is.na(estimate), "Ref.", beta_fun(estimate)),
-      ll = ~ beta_fun(conf.low),
-      ul = ~ beta_fun(conf.high),
-      ci = ~ ifelse(is.na(estimate), NA_character_, paste0(ll, ", ", ul)),
-      pvalue_exact = ~p.value,
-      pvalue = ~ pvalue_fun(p.value),
-      p_pvalue = ~ dplyr::case_when(
-        is.na(pvalue) ~ NA_character_,
-        stringr::str_sub(pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", pvalue),
-        TRUE ~ paste0("p=", pvalue)
+    dplyr::mutate(
+      est = ifelse(is.na(.data$estimate), "Ref.", beta_fun(.data$estimate)),
+      ll = beta_fun(.data$conf.low),
+      ul = beta_fun(.data$conf.high),
+      ci = ifelse(is.na(.data$estimate), NA_character_, paste0(.data$ll, ", ", .data$ul)),
+      pvalue_exact = .data$p.value,
+      pvalue = pvalue_fun(.data$p.value),
+      p_pvalue = dplyr::case_when(
+        is.na(.data$pvalue) ~ NA_character_,
+        stringr::str_sub(.data$pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", .data$pvalue),
+        TRUE ~ paste0("p=", .data$pvalue)
       )
     )
 }

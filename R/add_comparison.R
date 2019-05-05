@@ -37,7 +37,7 @@ add_comparison <- function(x, test = NULL, pvalue_fun = fmt_pvalue, id = x$input
       stat_test = assign_test(
         data = x$inputs$data,
         var = .data$.variable,
-        var_summary_type = .summary_type,
+        var_summary_type = .data$.summary_type,
         by_var = x$inputs$by,
         test = test,
         id = id
@@ -47,8 +47,8 @@ add_comparison <- function(x, test = NULL, pvalue_fun = fmt_pvalue, id = x$input
         data = x$inputs$data,
         variable = .data$.variable,
         by = x$inputs$by,
-        test = stat_test,
-        type = .summary_type,
+        test = .data$stat_test,
+        type = .data$.summary_type,
         id = id
       ),
       # formatting pvalue

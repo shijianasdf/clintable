@@ -125,9 +125,9 @@ fmt_uni_regression <- function(data, method, y, method.args = NULL,
     model_tbl %>%
     dplyr::filter_(~ row_type == "label") %>%
     dplyr::select(c("variable", "var_type", "label", "N")) %>%
-    dplyr::mutate_(
-      N_levels = ~ purrr::map2_int(
-        variable, var_type,
+    dplyr::mutate(
+      N_levels = purrr::map2_int(
+        .data$variable, .data$var_type,
         ~ ifelse(..2 == "categorical",
           model_tbl %>% dplyr::filter_(~ variable == ..1 & row_type == "level") %>% nrow(),
           NA_integer_
@@ -141,10 +141,10 @@ fmt_uni_regression <- function(data, method, y, method.args = NULL,
   model_tbl <-
     model_tbl %>%
     dplyr::filter_(~ !startsWith(row_type, "header") | dplyr::row_number() <= header_n) %>%
-    dplyr::mutate_(
-      N = ~ dplyr::case_when(
-        row_type == "label" ~ N %>% as.character(),
-        row_type == "header1" ~ "N",
+    dplyr::mutate(
+      N = dplyr::case_when(
+        .data$row_type == "label" ~ N %>% as.character(),
+        .data$row_type == "header1" ~ "N",
         TRUE ~ NA_character_
       )
     )

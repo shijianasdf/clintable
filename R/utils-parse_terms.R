@@ -64,8 +64,8 @@ parse_terms <- function(x, tidy_model, show_yesno) {
         tibble::tibble(
           level = stats::model.frame(x)[[v]] %>% unique()
         ) %>%
-        dplyr::mutate_(
-          term = ~ paste0(v, level)
+        dplyr::mutate(
+          term = paste0(v, .data$level)
         ) %>%
         dplyr::arrange_("level") %>%
         dplyr::select("term")

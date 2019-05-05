@@ -115,8 +115,8 @@ summarize_categorical <- function(data, variable, by, var_label,
       results_wide %>%
       dplyr::filter_(~ .variable %in% c(dichotomous_value, NA)) %>%
       dplyr::mutate(
-        label = ifelse(!is.na(.data$.variable), var_label, label),
-        row_type = ifelse(!is.na(.data$.variable), "label", row_type)
+        label = ifelse(!is.na(.data$.variable), var_label, .data$label),
+        row_type = ifelse(!is.na(.data$.variable), "label", .data$row_type)
       )
   } else { # otherwise adding in a header row on top
     results_final <-
