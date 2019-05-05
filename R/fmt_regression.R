@@ -1,8 +1,7 @@
 #' Turn a regression model object into a markdown-ready tibble.
 #'
 #' This function uses \code{broom::tidy} from the `broom` or `broom.mixed` packages
-#' to perform the initial model formatting. Review the `fmt_regression`
-#' \href{http://www.danieldsjoberg.com/clintable/articles/fmt_regression.html}{vignette}
+#' to perform the initial model formatting. Review the `fmt_regression` vignette
 #' for detailed examples.
 #'
 #' @param x regression model object

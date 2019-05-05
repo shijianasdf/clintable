@@ -11,7 +11,7 @@ vignette: >
 
 
 ```{r setup, include = FALSE}
-library(clintable)
+library(gtsummary)
 library(dplyr)
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -41,7 +41,7 @@ We will use the `trial` data set throughout this example.  This set contains dat
     grade    Grade
     response Tumor Response
 
-The default output from `fmt_regression()` is meant to be publication ready.  Let's start by creating a regression model table from the `trial` data set included in the `clintable` package.  We will predict tumor response using age, stage, and grade using a logistic regression model.  
+The default output from `fmt_regression()` is meant to be publication ready.  Let's start by creating a regression model table from the `trial` data set included in the `gtsummary` package.  We will predict tumor response using age, stage, and grade using a logistic regression model.  
 
 ```{r, message=FALSE}
 # build logistic regression model
@@ -128,7 +128,7 @@ inline_text(fmt_m1, "age", stat = "(OR {est}; 95% CI {ci}; {p_pvalue})")` ``.
 If you're printing results from a categorical variable, include the desired level after the variable name, e.g. `inline_text(fmt_m1, "stage:T3")` resolves to "`r inline_text(fmt_m1, "stage:T3")`".  
 
 
-## clintable + kableExtra
+## gtsummary + kableExtra
 
 Remember how the results are stored in a data frame? Need that data frame for any reason (e.g. if you want to get extra fancy with `kableExtra`)? Use generic function as_tibble to extract an easy-to-use data frame from any fmt_regression object. 
 

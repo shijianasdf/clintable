@@ -1,9 +1,7 @@
 #' Creates table of univariate regression results
 #'
 #' The `fmt_uni_regression` function arguments are similar to the \code{\link{fmt_regression}}
-#' arguments. Review the `fmt_uni_regression`
-#' \href{http://www.danieldsjoberg.com/clintable/articles/fmt_regression.html#fmt_uni_regression}{vignette}
-#' for detailed examples.
+#' arguments. Review the `fmt_uni_regression` vignette for detailed examples.
 #'
 #' @param data Data frame to be used in univariate regression modeling.  Data frame
 #' includes the outcome variable(s) and the independent variables.

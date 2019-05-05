@@ -44,9 +44,7 @@ Default is 0.95.}
 }
 \description{
 The \code{fmt_uni_regression} function arguments are similar to the \code{\link{fmt_regression}}
-arguments. Review the \code{fmt_uni_regression}
-\href{http://www.danieldsjoberg.com/clintable/articles/fmt_regression.html#fmt_uni_regression}{vignette}
-for detailed examples.
+arguments. Review the \code{fmt_uni_regression} vignette for detailed examples.
 }
 \examples{
 fmt_uni_regression(
