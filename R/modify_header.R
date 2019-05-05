@@ -70,7 +70,7 @@ modify_header.fmt_table1 <- function(x, label = NULL, stat_by = NULL,
 
   # creating new header
   header <-
-    dplyr::data_frame(row_type = paste0("header", max_length:1)) %>%
+    tibble::tibble(row_type = paste0("header", max_length:1)) %>%
     dplyr::left_join(old_header, by = "row_type") %>%
     dplyr::left_join(header_list[["row_type"]], by = "row_type")
 
@@ -173,7 +173,7 @@ modify_header.fmt_regression <- function(x, label = NULL, est = NULL,
 
   # creating new header
   header <-
-    dplyr::data_frame(row_type = paste0("header", max_length:1)) %>%
+    tibble::tibble(row_type = paste0("header", max_length:1)) %>%
     dplyr::left_join(old_header, by = "row_type") %>%
     dplyr::left_join(header_list[["row_type"]], by = "row_type")
 
@@ -288,7 +288,7 @@ modify_header.fmt_uni_regression <- function(x, label = NULL, N = NULL, est = NU
 
   # creating new header
   header <-
-    dplyr::data_frame(row_type = paste0("header", max_length:1)) %>%
+    tibble::tibble(row_type = paste0("header", max_length:1)) %>%
     dplyr::left_join(old_header, by = "row_type") %>%
     dplyr::left_join(header_list[["row_type"]], by = "row_type")
 

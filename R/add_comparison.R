@@ -32,27 +32,27 @@ add_comparison <- function(x, test = NULL, pvalue_fun = fmt_pvalue, id = x$input
   # getting the test name and pvalue
   meta_data <-
     x$meta_data %>%
-    dplyr::mutate_(
+    dplyr::mutate(
       # assigning statistical test to perform
-      stat_test = ~ assign_test(
+      stat_test = assign_test(
         data = x$inputs$data,
-        var = .variable,
+        var = .data$.variable,
         var_summary_type = .summary_type,
         by_var = x$inputs$by,
         test = test,
         id = id
       ),
       # calculating pvalue
-      pvalue_exact = ~ calculate_pvalue(
+      pvalue_exact = calculate_pvalue(
         data = x$inputs$data,
-        variable = .variable,
+        variable = .data$.variable,
         by = x$inputs$by,
         test = stat_test,
         type = .summary_type,
         id = id
       ),
       # formatting pvalue
-      pvalue = ~ pvalue_fun(pvalue_exact)
+      pvalue = pvalue_fun(.data$pvalue_exact)
     )
 
   # stacking p-values and header rows
@@ -62,7 +62,7 @@ add_comparison <- function(x, test = NULL, pvalue_fun = fmt_pvalue, id = x$input
       dplyr::bind_cols(pvalue_header$row_type, pvalue_header$pvalue),
       meta_data %>%
         dplyr::select(dplyr::one_of(c(".variable", "pvalue"))) %>%
-        dplyr::mutate_(row_type = ~"label")
+        dplyr::mutate(row_type = "label")
     )
 
   table1 <-

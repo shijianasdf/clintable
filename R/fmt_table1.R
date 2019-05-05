@@ -40,7 +40,7 @@
 #' @return Data frame including formatted descriptive statistics.
 #' @examples
 #' fmt_table1(trial, by = "trt")
-#' 
+#'
 #' # convert numeric 'am' to factor to display nicely in header
 #' mtcars %>%
 #'   dplyr::mutate(am = factor(am, c(0, 1), c("Automatic", "Manual"))) %>%
@@ -66,7 +66,7 @@ fmt_table1 <- function(data, by = NULL, label = NULL, type = NULL,
   )
 
   # creating a table with meta data about each variable
-  meta_data <- dplyr::data_frame(.variable = names(data))
+  meta_data <- tibble::tibble(.variable = names(data))
   # excluding by variable
   if (!is.null(by)) meta_data <- meta_data %>% dplyr::filter_(~ .variable != by)
   # excluding id variable

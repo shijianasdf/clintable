@@ -10,7 +10,7 @@ fmt_table1_header <- function(data, by, pvalue) {
 
   # if there is no by variable, the header will simply be N
   if (is.null(by)) {
-    fmt_table1_header <- dplyr::data_frame(
+    fmt_table1_header <- tibble::tibble(
       .stat = paste0("N = ", nrow(data))
     )
   }
@@ -21,7 +21,7 @@ fmt_table1_header <- function(data, by, pvalue) {
       table(data[[by]]) %>%
       as.matrix() %>%
       t() %>%
-      dplyr::as_data_frame() %>%
+      tibble::as_tibble() %>%
       dplyr::mutate_all(dplyr::funs(paste0("N = ", .)))
 
     # adding label (defalut is var:var_value)
@@ -31,7 +31,7 @@ fmt_table1_header <- function(data, by, pvalue) {
           names(.) <- names(fmt_table1_header)
         } %>%
           t() %>%
-          dplyr::as_data_frame(),
+          tibble::as_tibble(),
         fmt_table1_header
       )
   }

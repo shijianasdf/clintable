@@ -3,7 +3,7 @@
 set.seed(8976)
 n <- 200
 trial <-
-  dplyr::data_frame(
+  tibble::tibble(
     trt = ifelse(runif(n) < 0.5, "Placebo", "Drug"),
     age = rnorm(n, mean = 50, sd = 15) %>% as.integer(),
     marker = rgamma(n, 1, 1) %>% round(digits = 3),

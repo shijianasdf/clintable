@@ -69,14 +69,14 @@ create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
   )
 
   results[["row_type"]] <-
-    dplyr::data_frame(
+    tibble::tibble(
       row_type = paste0("header", max_length:1)
     )
 
   # label ----------------------------------------------------------------------
   if (!is.null(label)) {
     results[["label"]] <-
-      dplyr::data_frame(label = fill_blanks(label, max_length))
+      tibble::tibble(label = fill_blanks(label, max_length))
   }
 
 
@@ -97,7 +97,7 @@ create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
         N = ~ sum(n),
         p = ~ fmt_percent(n / N),
         row_type = ~ list(
-          dplyr::data_frame(
+          tibble::tibble(
             row_type = paste0("header", length(fill_blanks(stat_by, max_length)):1),
             stat_def = fill_blanks(stat_by, max_length)
           )
@@ -118,7 +118,7 @@ create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
   # stat_overall -------------------------------------------------------------
   if (!is.null(stat_overall)) {
     results[["stat_overall"]] <-
-      dplyr::data_frame(stat_def = fill_blanks(stat_overall, max_length)) %>%
+      tibble::tibble(stat_def = fill_blanks(stat_overall, max_length)) %>%
       dplyr::mutate_(
         row_type = ~ paste0("header", dplyr::n():1),
         N = ~ nrow(data)
@@ -135,25 +135,25 @@ create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
   # pvalue--------------------------------------------------------------------
   if (!is.null(pvalue)) {
     results[["pvalue"]] <-
-      dplyr::data_frame(pvalue = fill_blanks(pvalue, max_length))
+      tibble::tibble(pvalue = fill_blanks(pvalue, max_length))
   }
 
   # est ----------------------------------------------------------------------
   if (!is.null(est)) {
     results[["est"]] <-
-      dplyr::data_frame(est = fill_blanks(est, max_length))
+      tibble::tibble(est = fill_blanks(est, max_length))
   }
 
   # ci ----------------------------------------------------------------------
   if (!is.null(ci)) {
     results[["ci"]] <-
-      dplyr::data_frame(ci = fill_blanks(ci, max_length))
+      tibble::tibble(ci = fill_blanks(ci, max_length))
   }
 
   # N ----------------------------------------------------------------------
   if (!is.null(N)) {
     results[["N"]] <-
-      dplyr::data_frame(N = fill_blanks(N, max_length))
+      tibble::tibble(N = fill_blanks(N, max_length))
   }
 
   # returning results --------------------------------------------------------

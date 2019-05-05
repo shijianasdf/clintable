@@ -61,7 +61,7 @@ parse_terms <- function(x, tidy_model, show_yesno) {
     else {
       # making dataframe of the terms
       fct_terms <-
-        dplyr::data_frame(
+        tibble::tibble(
           level = stats::model.frame(x)[[v]] %>% unique()
         ) %>%
         dplyr::mutate_(

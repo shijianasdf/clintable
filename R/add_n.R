@@ -51,14 +51,14 @@ add_n <- function(x, missing = FALSE, last = FALSE) {
   }
   if (missing == FALSE) {
     header <-
-      dplyr::data_frame(
+      tibble::tibble(
         .variable = c(NA_character_, by_space),
         N = c("N", by_space)
       )
   }
   if (missing == TRUE) {
     header <-
-      dplyr::data_frame(
+      tibble::tibble(
         .variable = c(NA_character_, by_space),
         N_missing = c("N Missing", by_space)
       )

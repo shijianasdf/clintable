@@ -64,7 +64,7 @@ fmt_regression <- function(x, exponentiate = FALSE, label = NULL,
 
   # putting all results into tibble
   raw_results <-
-    dplyr::data_frame(variable = names(mod_list)) %>%
+    tibble::tibble(variable = names(mod_list)) %>%
     dplyr::mutate_(
       estimates = ~mod_list,
       var_type = ~ purrr::map_chr(estimates, ~ ifelse(nrow(.x) > 1, "categorical", "continuous")),
@@ -126,7 +126,7 @@ add_label <- function(var_type, estimates, var_label, variable) {
     var_type == "continuous" ~ list(estimates %>% dplyr::mutate_(row_type = ~"label", label = ~var_label)),
     var_type == "categorical" ~ list(
       dplyr::bind_rows(
-        dplyr::data_frame(row_type = "label", label = var_label),
+        tibble::tibble(row_type = "label", label = var_label),
         estimates %>% dplyr::mutate_(
           row_type = ~"level",
           label = ~ stringr::str_replace(term, stringr::fixed(variable), "")
@@ -185,7 +185,7 @@ default_header_fmt_regression <- function(x, model_tbl, exponentiate, conf.level
   # adding header row, and appending
   model_tbl <-
     dplyr::bind_rows(
-      dplyr::data_frame(
+      tibble::tibble(
         row_type = "header1",
         label = paste0("N = ", n),
         est = est_name,

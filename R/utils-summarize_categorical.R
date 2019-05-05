@@ -121,7 +121,7 @@ summarize_categorical <- function(data, variable, by, var_label,
   } else { # otherwise adding in a header row on top
     results_final <-
       dplyr::bind_rows(
-        dplyr::data_frame(row_type = "label", label = var_label),
+        tibble::tibble(row_type = "label", label = var_label),
         results_wide
       )
   }

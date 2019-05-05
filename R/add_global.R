@@ -164,7 +164,7 @@ add_global.fmt_uni_regression <- function(x, ...) {
 
   # making tbl to merge with model_tbl
   global_p_merge <-
-    dplyr::data_frame(row_type = "header1", pvalue = "p-value") %>%
+    tibble::tibble(row_type = "header1", pvalue = "p-value") %>%
     dplyr::bind_rows(
       global_p %>%
         dplyr::select(c("variable", "global_pvalue")) %>%

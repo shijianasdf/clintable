@@ -22,7 +22,7 @@ assign_var_label <- function(data, variable, var_label) {
 }
 
 # n = 10
-# dta = dplyr::data_frame(
+# dta =tibble::tibble(
 #   age = rnorm(n),
 #   sex = 1
 # )
@@ -31,7 +31,7 @@ assign_var_label <- function(data, variable, var_label) {
 # var_label_one(dta, "age", NULL)
 #
 # meta =
-#   dplyr::data_frame(
+#   tibble::tibble(
 #     variable = names(dta)
 #   )
 #
