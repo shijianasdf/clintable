@@ -90,7 +90,7 @@ create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
         by = by
       ) %>%
       purrr::set_names("level", "by_col") %>%
-      dplyr::count_(c("by_col", "level")) %>%
+      dplyr::count(.data$by_col, .data$level) %>%
       dplyr::mutate(
         name = by,
         label = attr(data[[by]], "label") %||% NA_character_,

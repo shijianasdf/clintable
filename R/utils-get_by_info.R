@@ -15,7 +15,7 @@ get_by_info <- function(data, by) {
     data %>%
     dplyr::select(dplyr::one_of(by)) %>%
     dplyr::distinct() %>%
-    dplyr::arrange_(by)
+    dplyr::arrange(.data[[by]])
   by_info <-
     by_info %>%
     dplyr::mutate(

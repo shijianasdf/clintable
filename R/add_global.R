@@ -35,7 +35,7 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
   model_terms <- x %>%
     purrr::pluck("model_tbl") %>%
     dplyr::select(dplyr::one_of(c("var_type", "variable"))) %>%
-    dplyr::filter_(~ var_type == "categorical") %>%
+    dplyr::filter(.data$var_type == "categorical") %>%
     dplyr::distinct() %>%
     dplyr::pull("variable")
 
@@ -63,7 +63,7 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
     # stats::drop1(test = test) %>% # this function only supports lm and glm
     as.data.frame() %>%
     tibble::rownames_to_column(var = "variable") %>%
-    dplyr::filter_(~ variable %in% terms) %>%
+    dplyr::filter(.data$variable %in% terms) %>%
     dplyr::select(c("variable", dplyr::starts_with("Pr(>"))) %>% # selecting the pvalue column
     purrr::set_names(c("variable", "global_pvalue_exact"))
 
@@ -140,7 +140,7 @@ add_global.fmt_uni_regression <- function(x, ...) {
       ~ car::Anova(.x, type = "III") %>%
         as.data.frame() %>%
         tibble::rownames_to_column(var = "variable") %>%
-        dplyr::filter_(~ variable == .y) %>%
+        dplyr::filter(.data$variable == .y) %>%
         dplyr::select(c("variable", dplyr::starts_with("Pr(>"))) %>% # selecting the pvalue column
         purrr::set_names(c("variable", "global_pvalue_exact"))
     ) %>%

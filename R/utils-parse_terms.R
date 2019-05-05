@@ -67,7 +67,7 @@ parse_terms <- function(x, tidy_model, show_yesno) {
         dplyr::mutate(
           term = paste0(v, .data$level)
         ) %>%
-        dplyr::arrange_("level") %>%
+        dplyr::arrange(.data$level) %>%
         dplyr::select("term")
 
       # checking that these new terms match any terms in model

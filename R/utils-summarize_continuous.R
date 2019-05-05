@@ -39,26 +39,26 @@ summarize_continuous <- function(data, variable, by, digits,
       dplyr::mutate(
         .by = paste0("stat_by", as.numeric(factor(.data$.by)))
       ) %>%
-      dplyr::group_by_(".by")
+      dplyr::group_by(.data$.by)
   }
 
   # calculating summary stats and number unknown
   results_long <-
     data %>%
-    dplyr::summarise_(
-      n_missing = ~ sum(is.na(.variable)),
-      median = ~ median(.variable, na.rm = TRUE),
-      q1 = ~ quantile(.variable, probs = 0.25, na.rm = TRUE),
-      q3 = ~ quantile(.variable, probs = 0.75, na.rm = TRUE),
-      min = ~ min(.variable, na.rm = TRUE),
-      max = ~ max(.variable, na.rm = TRUE),
-      mean = ~ mean(.variable, na.rm = TRUE),
-      sd = ~ stats::sd(.variable, na.rm = TRUE),
-      var = ~ sd^2,
+    dplyr::summarise(
+      n_missing = sum(is.na(.data$.variable)),
+      median = stats::median(.data$.variable, na.rm = TRUE),
+      q1 = stats::quantile(.data$.variable, probs = 0.25, na.rm = TRUE),
+      q3 = stats::quantile(.data$.variable, probs = 0.75, na.rm = TRUE),
+      min = min(.data$.variable, na.rm = TRUE),
+      max = max(.data$.variable, na.rm = TRUE),
+      mean = mean(.data$.variable, na.rm = TRUE),
+      sd = stats::sd(.data$.variable, na.rm = TRUE),
+      var = .data$sd^2,
       # pseudonyms
-      med = ~median, q2 = ~median, p50 = ~median,
-      p25 = ~q1, p75 = ~q3,
-      minimum = ~min, maximum = ~max
+      med = .data$median, q2 = .data$median, p50 = .data$median,
+      p25 = .data$q1, p75 = .data$q3,
+      minimum = .data$min, maximum = .data$max
     ) %>%
     dplyr::mutate_at(
       c(

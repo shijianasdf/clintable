@@ -68,9 +68,9 @@ fmt_table1 <- function(data, by = NULL, label = NULL, type = NULL,
   # creating a table with meta data about each variable
   meta_data <- tibble::tibble(.variable = names(data))
   # excluding by variable
-  if (!is.null(by)) meta_data <- meta_data %>% dplyr::filter_(~ .variable != by)
+  if (!is.null(by)) meta_data <- meta_data %>% dplyr::filter(.data$.variable != by)
   # excluding id variable
-  if (!is.null(id)) meta_data <- meta_data %>% dplyr::filter_(~ !(.variable %in% id))
+  if (!is.null(id)) meta_data <- meta_data %>% dplyr::filter(!(.data$.variable %in% id))
 
   # assigning variable characteristics
   meta_data <- meta_data %>%
