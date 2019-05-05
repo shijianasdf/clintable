@@ -6,13 +6,12 @@
 \alias{gtsummary-package}
 \title{gtsummary: Great, Presentation-ready Data Summary Tables}
 \description{
-The {gtsummary} package creates
+The gtsummary package creates
     presentation-ready tables summarizing data sets, regression models,
     and more. The code to create the tables is concise and highly
     customizable. Data frames can be summarized with many functions.
     Regression models are summarized including the reference row for
-    categorical independent variables.  headers.License: MIT + file
-    LICENSE
+    categorical independent variables.
 }
 \author{
 \strong{Maintainer}: Daniel D. Sjoberg \email{danieldsjoberg@gmail.com}

@@ -1,18 +1,17 @@
 Package: gtsummary
-Title: Great, Presentation-ready Data Summary Tables
+Title: Presentation-ready Data Summary Tables
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Daniel D.",
            family = "Sjoberg",
            role = c("aut", "cre"),
            email = "danieldsjoberg@gmail.com")
-Description: The {gtsummary} package creates
+Description: The gtsummary package creates
     presentation-ready tables summarizing data sets, regression models,
     and more. The code to create the tables is concise and highly
     customizable. Data frames can be summarized with many functions.
     Regression models are summarized including the reference row for
-    categorical independent variables.  headers.License: MIT + file
-    LICENSE
+    categorical independent variables.
 License: MIT + file LICENSE
 Depends: 
     R (>= 3.4)
