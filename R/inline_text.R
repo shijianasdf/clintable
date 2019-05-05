@@ -23,7 +23,7 @@ inline_text <- function(x, ...) UseMethod("inline_text")
 #' t1 <- fmt_table1(mtcars)
 #' t2 <- fmt_table1(mtcars, by = "am")
 #' t3 <- fmt_table1(mtcars, by = "am") %>% add_overall()
-#' 
+#'
 #' inline_text(t1, "mpg") # mpg
 #' inline_text(t1, "cyl:4") # cyl=4
 #' inline_text(t2, "mpg:1") # mpg with am=1
@@ -176,9 +176,9 @@ inline_text.fmt_table1 <- function(x, cell, sep = ":", pvalue = FALSE,
 #' mod <- glm(response ~ age + grade + stage, trial, family = binomial(link = "logit")) %>%
 #'   fmt_regression(exponentiate = TRUE)
 #' inline_text(mod, "age")
-#' 
+#'
 #' inline_text(mod, "grade:III")
-#' 
+#'
 #' trial %>%
 #'   fmt_uni_regression(
 #'     method = "lm",
@@ -254,8 +254,8 @@ inline_text.fmt_regression <- function(x, cell, stat = "{est} (95% CI {ci}; {p_p
   # calculating statistic to be returned
   results <-
     results %>%
-    dplyr::mutate_(
-      stat_return = ~ as.character(glue::glue(stat))
+    dplyr::mutate(
+      stat_return = as.character(glue::glue(stat))
     ) %>%
     dplyr::pull("stat_return")
 

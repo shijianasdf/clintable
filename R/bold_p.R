@@ -68,11 +68,11 @@ bold_p.fmt_regression <- function(x, t = 0.05, ...) {
   # This replaces p-values for var_sig variables with bolded p-values
   x$model_tbl <-
     x$model_tbl %>%
-    dplyr::mutate_(
-      pvalue = ~ ifelse(
-        pvalue_exact < t,
-        paste0("__", pvalue, "__"),
-        pvalue
+    dplyr::mutate(
+      pvalue = ifelse(
+        .data$pvalue_exact < t,
+        paste0("__", .data$pvalue, "__"),
+        .data$pvalue
       )
     )
 
@@ -106,9 +106,9 @@ bold_p.fmt_uni_regression <- function(x, t = 0.05, q = FALSE, ...) {
     # This replaces p-values for var_sig variables with bolded p-values
     x$model_tbl <-
       x$model_tbl %>%
-      dplyr::mutate_(pvalue = ~ ifelse(pvalue_exact < t,
-        paste0("__", pvalue, "__"),
-        pvalue
+      dplyr::mutate(pvalue = ifelse(.data$pvalue_exact < t,
+        paste0("__", .data$pvalue, "__"),
+        .data$pvalue
       ))
   }
 
@@ -124,11 +124,11 @@ bold_p.fmt_uni_regression <- function(x, t = 0.05, q = FALSE, ...) {
 
     x$model_tbl <-
       x$model_tbl %>%
-      dplyr::mutate_(
-        pvalue = ~ ifelse(
-          variable %in% var_sig & row_type == "label",
-          paste0("__", pvalue, "__"),
-          pvalue
+      dplyr::mutate(
+        pvalue = ifelse(
+          .data$variable %in% var_sig & .data$row_type == "label",
+          paste0("__", .data$pvalue, "__"),
+          .data$pvalue
         )
       )
   }
@@ -143,11 +143,11 @@ bold_p.fmt_uni_regression <- function(x, t = 0.05, q = FALSE, ...) {
 
     x$model_tbl <-
       x$model_tbl %>%
-      dplyr::mutate_(
-        qvalue = ~ ifelse(
-          variable %in% var_sig & row_type == "label",
-          paste0("__", qvalue, "__"),
-          qvalue
+      dplyr::mutate(
+        qvalue = ifelse(
+          .data$variable %in% var_sig & .data$row_type == "label",
+          paste0("__", .data$qvalue, "__"),
+          .data$qvalue
         )
       )
   }

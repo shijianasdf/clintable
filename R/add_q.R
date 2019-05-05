@@ -32,9 +32,9 @@ add_q.fmt_table1 <- function(x, method = "fdr", pvalue_fun = fmt_pvalue, ...) {
   # adding exact and printable q value to meta_data
   x$meta_data <-
     x$meta_data %>%
-    dplyr::mutate_(
-      qvalue_exact = ~ p.adjust(pvalue_exact, method = method),
-      qvalue = ~ pvalue_fun(qvalue_exact)
+    dplyr::mutate(
+      qvalue_exact = stats::p.adjust(.data$pvalue_exact, method = method),
+      qvalue = pvalue_fun(.data$qvalue_exact)
     )
 
   # adding q value to table1
@@ -43,11 +43,11 @@ add_q.fmt_table1 <- function(x, method = "fdr", pvalue_fun = fmt_pvalue, ...) {
     dplyr::left_join(
       x$meta_data %>%
         dplyr::select(c(".variable", "qvalue")) %>%
-        dplyr::mutate_(row_type = ~"label"),
+        dplyr::mutate(row_type = "label"),
       by = c(".variable", "row_type")
     ) %>%
-    dplyr::mutate_(
-      qvalue = ~ ifelse(row_type == "header2", "q-value", qvalue)
+    dplyr::mutate(
+      qvalue = ifelse(.data$row_type == "header2", "q-value", .data$qvalue)
     )
 
   # keep track of what functions have been called
@@ -94,9 +94,9 @@ add_q.fmt_uni_regression <- function(x, method = "fdr", ...) {
   # adding exact and printable q value to meta_data
   x$meta_data <-
     x$meta_data %>%
-    dplyr::mutate_(
-      qvalue_exact = ~ p.adjust(global_pvalue_exact, method = method),
-      qvalue = ~ x$inputs$pvalue_fun(qvalue_exact)
+    dplyr::mutate(
+      qvalue_exact = stats::p.adjust(.data$global_pvalue_exact, method = method),
+      qvalue = x$inputs$pvalue_fun(.data$qvalue_exact)
     )
 
   # adding q value to table1
@@ -105,11 +105,11 @@ add_q.fmt_uni_regression <- function(x, method = "fdr", ...) {
     dplyr::left_join(
       x$meta_data %>%
         dplyr::select(c("variable", "qvalue")) %>%
-        dplyr::mutate_(row_type = ~"label"),
+        dplyr::mutate(row_type = "label"),
       by = c("variable", "row_type")
     ) %>%
-    dplyr::mutate_(
-      qvalue = ~ ifelse(row_type == "header1", "q-value", qvalue)
+    dplyr::mutate(
+      qvalue = ifelse(.data$row_type == "header1", "q-value", .data$qvalue)
     )
 
   x$call_list <- c(x$call_list, list(add_q = match.call()))
