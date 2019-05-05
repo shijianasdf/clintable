@@ -197,7 +197,7 @@ tab1 %>%
     general = "Isn't this footnote so nice?",
     number = c("You can also add numbered or lettered footnotes", "Which is great.")
   ) %>%
-  add_indent(indent_key(tab1)) #indent_key() is a clintable function!
+  add_indent(indent_key(tab1)) 
 ```
 
 ## Under the Hood

@@ -33,7 +33,7 @@
 <meta property="og:title" content="Tidies regression object based on class — tidy_wrap" />
 
 <meta property="og:description" content="The tidy_wrap() function has two primary functions.  First, using either
-tidy or broom.mixed::tidy (depending on model input class)
+broom::tidy or broom.mixed::tidy (depending on model input class)
 the regression model object is converted into a data frame. It then adjusts the
 output for use in the rest of fmt_regression." />
 <meta name="twitter:card" content="summary" />
@@ -128,7 +128,7 @@ output for use in the rest of fmt_regression." />
     <div class="ref-description">
     
     <p>The <code>tidy_wrap()</code> function has two primary functions.  First, using either
-<code><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>tidy</a></code> or <code><a href='https://www.rdocumentation.org/packages/broom.mixed/topics/reexports'>broom.mixed::tidy</a></code> (depending on model input class)
+<code><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>broom::tidy</a></code> or <code><a href='https://www.rdocumentation.org/packages/broom.mixed/topics/reexports'>broom.mixed::tidy</a></code> (depending on model input class)
 the regression model object is converted into a data frame. It then adjusts the
 output for use in the rest of <code><a href='fmt_regression.html'>fmt_regression</a></code>.</p>
     
@@ -145,19 +145,19 @@ output for use in the rest of <code><a href='fmt_regression.html'>fmt_regression
     </tr>
     <tr>
       <th>exponentiate</th>
-      <td><p>logical argument passed directly to <code><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>tidy</a></code>
+      <td><p>logical argument passed directly to <code><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>broom::tidy</a></code>
 or <code><a href='https://www.rdocumentation.org/packages/broom.mixed/topics/reexports'>broom.mixed::tidy</a></code>.</p></td>
     </tr>
     <tr>
       <th>conf.level</th>
-      <td><p>confidence level passed directly to <code><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>tidy</a></code>
+      <td><p>confidence level passed directly to <code><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>broom::tidy</a></code>
 or <code><a href='https://www.rdocumentation.org/packages/broom.mixed/topics/reexports'>broom.mixed::tidy</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The output of <code><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>tidy</a></code> or <code><a href='https://www.rdocumentation.org/packages/broom.mixed/topics/reexports'>broom.mixed::tidy</a></code> will often include additional information
+    <p>The output of <code><a href='https://www.rdocumentation.org/packages/broom/topics/reexports'>broom::tidy</a></code> or <code><a href='https://www.rdocumentation.org/packages/broom.mixed/topics/reexports'>broom.mixed::tidy</a></code> will often include additional information
 that will not be included in a printed table from <code><a href='fmt_regression.html'>fmt_regression()</a></code>
 (e.g. scale parameters, random effects, etc.).  This
 simple helper function deletes extraneous rows from the output.

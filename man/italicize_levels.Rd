@@ -7,12 +7,12 @@
 italicize_levels(x, ...)
 }
 \arguments{
-\item{x}{\code{biostatR} object}
+\item{x}{summary object}
 
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-Italicize variable levels in \code{biostatR} objects by adding '_'
+Italicize variable levels by adding '_'
 to each side of the string
 }
 \seealso{

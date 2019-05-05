@@ -1,9 +1,8 @@
 #' Calculates and formats descriptive statistics for Table 1.
 #'
 #' The `fmt_table1` function calculates descriptive statistics by groups for
-#' continuous, categorical, and dichotomous variables.  Review the
-#' \href{https://github.mskcc.org/pages/datadojo/biostatR/articles/fmt_table1.html}{`fmt_table1` vignette}
-#' for detailed examples.
+#' continuous, categorical, and dichotomous variables.  Review the `fmt_table1`
+#' vignette for detailed examples.
 #'
 #' @param data data frame.
 #' @param by a character name of a categorical variable in data, `by = "group"`.

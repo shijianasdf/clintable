@@ -1,9 +1,6 @@
 #' Adds the global p-value for a categorical variables
 #'
 #' This function uses \code{\link[car]{Anova}} from the `car` package with `type = "III"` to calculate global p-values.
-#' If a needed class of model is not supported by `car::`\code{\link[car]{Anova}}, please put in an
-#' \href{https://github.mskcc.org/datadojo/biostatR/issues}{issue} to request support.
-#' Output from `fmt_regression` and `fmt_uni_regression` objects supported.
 #'
 #' @param x `fmt_regression` or `fmt_uni_regression` object
 #' @param ... further arguments passed to or from other methods.
@@ -15,8 +12,6 @@ add_global <- function(x, ...) UseMethod("add_global")
 #' Adds the global p-value for a categorical variables in `fmt_regression` objects
 #'
 #' This function uses \code{\link[car]{Anova}} from the `car` package with `type = "III"` to calculate global p-values.
-#' If a needed class of model is not supported by \code{\link[car]{Anova}}, please put in an
-#' issue at https://github.mskcc.org/datadojo/biostatR/issues to request support.
 #'
 #' @param x object with class `fmt_regression` from the \code{\link{fmt_regression}} function
 #' @param terms Character vector of terms for which to add global p-values.  Default
@@ -114,8 +109,6 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
 #' Adds the global p-value for a categorical variables in `fmt_uni_regression` objects
 #'
 #' This function uses \code{\link[car]{Anova}} from the `car` package with `type = "III"` to calculate global p-values.
-#' If a needed class of model is not supported by \code{\link[car]{Anova}}, please put in an
-#' issue at https://github.mskcc.org/datadojo/biostatR/issues to request support.
 #'
 #' @param x object with class `fmt_uni_regression` from the \code{\link{fmt_uni_regression}} function
 #' @param ... arguments to be passed to \code{\link[car]{Anova}}.  Adding `test.statistic = `

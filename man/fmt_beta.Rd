@@ -12,7 +12,7 @@ fmt_beta(x)
 \description{
 Takes in a vector of regression model coefficients, and returns a
 rounded and formatted coefficient vector.  This is the default
-rounding for models formatted with \code{biostatR::fmt_regression()}.  Coefficients
+rounding for models formatted with \code{fmt_regression()}.  Coefficients
 larger than 100 are rounded to the nearest integer, between  10 and 100 to one
 decimal place, and all others to 2 decimal places.  These thresholds were
 selected with odds ratios and hazard ratios in mind.
