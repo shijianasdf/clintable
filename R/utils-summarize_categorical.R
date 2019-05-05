@@ -46,8 +46,8 @@ summarize_categorical <- function(data, variable, by, var_label,
   if (!is.null(by)) {
     data <-
       data %>%
-      dplyr::mutate_(
-        .by = ~ paste0("stat_by", as.numeric(factor(.by)))
+      dplyr::mutate(
+        .by = paste0("stat_by", as.numeric(factor(.data$.by)))
       ) %>%
       dplyr::group_by_(".by")
   }
@@ -70,12 +70,12 @@ summarize_categorical <- function(data, variable, by, var_label,
   # counting big N, and calculating percent
   results_var_count <-
     results_var_count_n %>%
-    dplyr::mutate_(
-      N = ~ sum(n),
-      p = ~ ifelse(N > 0, fmt_percent(n / N), "NA"),
-      stat = ~ glue::glue(stat_display) %>% as.character(),
-      row_type = ~"level",
-      label = ~ as.character(.variable)
+    dplyr::mutate(
+      N = sum(.data$n),
+      p = ifelse(.data$N > 0, fmt_percent(.data$n / .data$N), "NA"),
+      stat = glue::glue(stat_display) %>% as.character(),
+      row_type = "level",
+      label = as.character(.data$.variable)
     ) %>%
     dplyr::ungroup() %>%
     dplyr::select(dplyr::one_of(c(dplyr::group_vars(data), "row_type", ".variable", "label", "stat")))
@@ -114,9 +114,9 @@ summarize_categorical <- function(data, variable, by, var_label,
     results_final <-
       results_wide %>%
       dplyr::filter_(~ .variable %in% c(dichotomous_value, NA)) %>%
-      dplyr::mutate_(
-        label = ~ ifelse(!is.na(.variable), var_label, label),
-        row_type = ~ ifelse(!is.na(.variable), "label", row_type)
+      dplyr::mutate(
+        label = ifelse(!is.na(.data$.variable), var_label, label),
+        row_type = ifelse(!is.na(.data$.variable), "label", row_type)
       )
   } else { # otherwise adding in a header row on top
     results_final <-

@@ -74,30 +74,31 @@ fmt_table1 <- function(data, by = NULL, label = NULL, type = NULL,
 
   # assigning variable characteristics
   meta_data <- meta_data %>%
-    dplyr::mutate_(
+    dplyr::mutate(
       # assigning class, if entire var is NA, then assigning class NA
-      .class = ~ assign_class(data, .variable),
-      .summary_type = ~ assign_summary_type(
-        data, .variable, .class, type
+      .class = assign_class(data, .data$.variable),
+      .summary_type = assign_summary_type(
+        data, .data$.variable, .data$.class, type
       ),
-      .dichotomous_value = ~ assign_dichotomous_value(data, .variable, .summary_type, .class),
-      .var_label = ~ assign_var_label(data, .variable, label),
-      .stat_display = ~ assign_stat_display(.summary_type, statistic),
-      .digits = ~ continuous_digits_guess(
-        data, .variable, .summary_type, .class, digits
+      .dichotomous_value = assign_dichotomous_value(data, .data$.variable,
+                                                    .data$.summary_type, .data$.class),
+      .var_label = assign_var_label(data, .data$.variable, label),
+      .stat_display = assign_stat_display(.data$.summary_type, statistic),
+      .digits = continuous_digits_guess(
+        data, .data$.variable, .data$.summary_type, .data$.class, digits
       )
     )
 
   # calculating summary statistics
   table1 <-
     meta_data %>%
-    dplyr::mutate_(
+    dplyr::mutate(
 
       # creating summary stat table formatted properly
-      .stat_table = ~ purrr::pmap(
+      .stat_table = purrr::pmap(
         list(
-          .variable, .summary_type, .dichotomous_value,
-          .var_label, .stat_display, .digits, .class
+          .data$.variable, .data$.summary_type, .data$.dichotomous_value,
+          .data$.var_label, .data$.stat_display, .data$.digits, .data$.class
         ),
         ~ calculate_summary_stat(data,
           variable = ..1, by = get("by"), summary_type = ..2,

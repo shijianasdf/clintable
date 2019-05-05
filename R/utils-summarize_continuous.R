@@ -36,8 +36,8 @@ summarize_continuous <- function(data, variable, by, digits,
   if (!is.null(by)) {
     data <-
       data %>%
-      dplyr::mutate_(
-        .by = ~ paste0("stat_by", as.numeric(factor(.by)))
+      dplyr::mutate(
+        .by = paste0("stat_by", as.numeric(factor(.data$.by)))
       ) %>%
       dplyr::group_by_(".by")
   }
@@ -67,10 +67,10 @@ summarize_continuous <- function(data, variable, by, digits,
       ),
       function(x) sprintf(glue::glue("%.{digits}f"), x)
     ) %>%
-    dplyr::mutate_(
-      row_type = ~"label",
-      label = ~var_label,
-      stat = ~ as.character(glue::glue(stat_display))
+    dplyr::mutate(
+      row_type = "label",
+      label = var_label,
+      stat = as.character(glue::glue(stat_display))
     ) %>%
     dplyr::select(dplyr::one_of(c(dplyr::group_vars(data), "row_type", "label", "stat", "n_missing")))
 
@@ -80,10 +80,10 @@ summarize_continuous <- function(data, variable, by, digits,
       results_long %>%
         dplyr::select(dplyr::one_of(c(dplyr::group_vars(data), "row_type", "label", "stat"))),
       results_long %>%
-        dplyr::mutate_(
-          row_type = ~"missing",
-          label = ~"Unknown",
-          stat = ~ as.character(n_missing)
+        dplyr::mutate(
+          row_type = "missing",
+          label = "Unknown",
+          stat = as.character(.data$n_missing)
         ) %>%
         dplyr::select(dplyr::one_of(c(dplyr::group_vars(data), "row_type", "label", "stat")))
     )

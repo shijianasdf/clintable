@@ -91,12 +91,12 @@ create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
       ) %>%
       purrr::set_names("level", "by_col") %>%
       dplyr::count_(c("by_col", "level")) %>%
-      dplyr::mutate_(
-        name = ~by,
-        label = ~ attr(data[[by]], "label") %||% NA_character_,
-        N = ~ sum(n),
-        p = ~ fmt_percent(n / N),
-        row_type = ~ list(
+      dplyr::mutate(
+        name = by,
+        label = attr(data[[by]], "label") %||% NA_character_,
+        N = sum(.data$n),
+        p = fmt_percent(.data$n / .data$N),
+        row_type = list(
           tibble::tibble(
             row_type = paste0("header", length(fill_blanks(stat_by, max_length)):1),
             stat_def = fill_blanks(stat_by, max_length)
@@ -105,8 +105,8 @@ create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
       ) %>%
       tidyr::unnest_("row_type") %>%
       tidyr::nest("level", "name", "label", "n", "N", "p") %>%
-      dplyr::mutate_(
-        header = ~ purrr::map2(stat_def, data, ~ glue::glue_data(.y, .x) %>% as.character())
+      dplyr::mutate(
+        header = purrr::map2(.data$stat_def, data, ~ glue::glue_data(.y, .x) %>% as.character())
       ) %>%
       tidyr::unnest_(c("data", "header")) %>%
       dplyr::select(dplyr::one_of("row_type", "by_col", "header")) %>%
@@ -119,13 +119,13 @@ create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
   if (!is.null(stat_overall)) {
     results[["stat_overall"]] <-
       tibble::tibble(stat_def = fill_blanks(stat_overall, max_length)) %>%
-      dplyr::mutate_(
-        row_type = ~ paste0("header", dplyr::n():1),
-        N = ~ nrow(data)
+      dplyr::mutate(
+        row_type = paste0("header", dplyr::n():1),
+        N = nrow(data)
       ) %>%
       tidyr::nest("N") %>%
-      dplyr::mutate_(
-        stat_overall = ~ purrr::map2(stat_def, data, ~ glue::glue_data(.y, .x) %>% as.character())
+      dplyr::mutate(
+        stat_overall = purrr::map2(.data$stat_def, data, ~ glue::glue_data(.y, .x) %>% as.character())
       ) %>%
       tidyr::unnest(data, stat_overall) %>%
       dplyr::select(dplyr::one_of(c("stat_overall")))
