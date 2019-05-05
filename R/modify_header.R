@@ -40,7 +40,7 @@ modify_header.fmt_table1 <- function(x, label = NULL, stat_by = NULL,
   # extracting the previous header
   old_header <-
     x$table1 %>%
-    dplyr::filter_("startsWith(row_type, 'header')")
+    dplyr::filter(startsWith(.data$row_type, 'header'))
 
   # number of rows in previous header
   old_header_n <- nrow(old_header)
@@ -70,7 +70,7 @@ modify_header.fmt_table1 <- function(x, label = NULL, stat_by = NULL,
 
   # creating new header
   header <-
-    dplyr::data_frame(row_type = paste0("header", max_length:1)) %>%
+    tibble::tibble(row_type = paste0("header", max_length:1)) %>%
     dplyr::left_join(old_header, by = "row_type") %>%
     dplyr::left_join(header_list[["row_type"]], by = "row_type")
 
@@ -119,7 +119,7 @@ modify_header.fmt_table1 <- function(x, label = NULL, stat_by = NULL,
   x$table1 <-
     dplyr::bind_rows(
       header %>% dplyr::select(dplyr::one_of(names(x$table1))),
-      x$table1 %>% dplyr::filter_("!startsWith(row_type, 'header')")
+      x$table1 %>% dplyr::filter(!startsWith(.data$row_type, 'header'))
     )
 
   return(x)
@@ -144,7 +144,7 @@ modify_header.fmt_regression <- function(x, label = NULL, est = NULL,
   # extracting the previous header
   old_header <-
     x$model_tbl %>%
-    dplyr::filter_("startsWith(row_type, 'header')")
+    dplyr::filter(startsWith(.data$row_type, 'header'))
 
   # number of rows in previous header
   old_header_n <- nrow(old_header)
@@ -173,7 +173,7 @@ modify_header.fmt_regression <- function(x, label = NULL, est = NULL,
 
   # creating new header
   header <-
-    dplyr::data_frame(row_type = paste0("header", max_length:1)) %>%
+    tibble::tibble(row_type = paste0("header", max_length:1)) %>%
     dplyr::left_join(old_header, by = "row_type") %>%
     dplyr::left_join(header_list[["row_type"]], by = "row_type")
 
@@ -222,7 +222,7 @@ modify_header.fmt_regression <- function(x, label = NULL, est = NULL,
   x$model_tbl <-
     dplyr::bind_rows(
       header %>% dplyr::select(dplyr::one_of(names(x$model_tbl))),
-      x$model_tbl %>% dplyr::filter_("!startsWith(row_type, 'header')")
+      x$model_tbl %>% dplyr::filter(!startsWith(.data$row_type, 'header'))
     )
 
   return(x)
@@ -258,7 +258,7 @@ modify_header.fmt_uni_regression <- function(x, label = NULL, N = NULL, est = NU
   # extracting the previous header
   old_header <-
     x$model_tbl %>%
-    dplyr::filter_("startsWith(row_type, 'header')")
+    dplyr::filter(startsWith(.data$row_type, 'header'))
 
   # number of rows in previous header
   old_header_n <- nrow(old_header)
@@ -288,7 +288,7 @@ modify_header.fmt_uni_regression <- function(x, label = NULL, N = NULL, est = NU
 
   # creating new header
   header <-
-    dplyr::data_frame(row_type = paste0("header", max_length:1)) %>%
+    tibble::tibble(row_type = paste0("header", max_length:1)) %>%
     dplyr::left_join(old_header, by = "row_type") %>%
     dplyr::left_join(header_list[["row_type"]], by = "row_type")
 
@@ -346,7 +346,7 @@ modify_header.fmt_uni_regression <- function(x, label = NULL, N = NULL, est = NU
   x$model_tbl <-
     dplyr::bind_rows(
       header %>% dplyr::select(dplyr::one_of(names(x$model_tbl))),
-      x$model_tbl %>% dplyr::filter_("!startsWith(row_type, 'header')")
+      x$model_tbl %>% dplyr::filter(!startsWith(.data$row_type, 'header'))
     )
 
   return(x)

@@ -1,9 +1,6 @@
 #' Adds the global p-value for a categorical variables
 #'
 #' This function uses \code{\link[car]{Anova}} from the `car` package with `type = "III"` to calculate global p-values.
-#' If a needed class of model is not supported by `car::`\code{\link[car]{Anova}}, please put in an
-#' \href{https://github.mskcc.org/datadojo/biostatR/issues}{issue} to request support.
-#' Output from `fmt_regression` and `fmt_uni_regression` objects supported.
 #'
 #' @param x `fmt_regression` or `fmt_uni_regression` object
 #' @param ... further arguments passed to or from other methods.
@@ -15,8 +12,6 @@ add_global <- function(x, ...) UseMethod("add_global")
 #' Adds the global p-value for a categorical variables in `fmt_regression` objects
 #'
 #' This function uses \code{\link[car]{Anova}} from the `car` package with `type = "III"` to calculate global p-values.
-#' If a needed class of model is not supported by \code{\link[car]{Anova}}, please put in an
-#' issue at https://github.mskcc.org/datadojo/biostatR/issues to request support.
 #'
 #' @param x object with class `fmt_regression` from the \code{\link{fmt_regression}} function
 #' @param terms Character vector of terms for which to add global p-values.  Default
@@ -35,7 +30,7 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
   model_terms <- x %>%
     purrr::pluck("model_tbl") %>%
     dplyr::select(dplyr::one_of(c("var_type", "variable"))) %>%
-    dplyr::filter_(~ var_type == "categorical") %>%
+    dplyr::filter(.data$var_type == "categorical") %>%
     dplyr::distinct() %>%
     dplyr::pull("variable")
 
@@ -63,18 +58,18 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
     # stats::drop1(test = test) %>% # this function only supports lm and glm
     as.data.frame() %>%
     tibble::rownames_to_column(var = "variable") %>%
-    dplyr::filter_(~ variable %in% terms) %>%
+    dplyr::filter(.data$variable %in% terms) %>%
     dplyr::select(c("variable", dplyr::starts_with("Pr(>"))) %>% # selecting the pvalue column
     purrr::set_names(c("variable", "global_pvalue_exact"))
 
   global_p <- global_p %>%
-    dplyr::mutate_(
-      row_type = ~"label",
-      global_pvalue = ~ x$inputs$pvalue_fun(global_pvalue_exact),
-      global_p_pvalue = ~ dplyr::case_when(
-        is.na(global_pvalue) ~ NA_character_,
-        stringr::str_sub(global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", global_pvalue),
-        TRUE ~ paste0("p=", global_pvalue)
+    dplyr::mutate(
+      row_type = "label",
+      global_pvalue = x$inputs$pvalue_fun(.data$global_pvalue_exact),
+      global_p_pvalue = dplyr::case_when(
+        is.na(.data$global_pvalue) ~ NA_character_,
+        stringr::str_sub(.data$global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", .data$global_pvalue),
+        TRUE ~ paste0("p=", .data$global_pvalue)
       )
     ) %>%
     dplyr::select(c("row_type", "variable", dplyr::starts_with("global_")))
@@ -86,10 +81,10 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
       global_p,
       by = c("row_type", "variable")
     ) %>%
-    dplyr::mutate_(
-      pvalue_exact = ~ dplyr::coalesce(global_pvalue_exact, pvalue_exact),
-      pvalue = ~ dplyr::coalesce(global_pvalue, pvalue),
-      p_pvalue = ~ dplyr::coalesce(global_p_pvalue, p_pvalue)
+    dplyr::mutate(
+      pvalue_exact = dplyr::coalesce(.data$global_pvalue_exact, .data$pvalue_exact),
+      pvalue = dplyr::coalesce(.data$global_pvalue, .data$pvalue),
+      p_pvalue = dplyr::coalesce(.data$global_p_pvalue, .data$p_pvalue)
     ) %>%
     dplyr::select(-dplyr::starts_with("global_"))
 
@@ -100,10 +95,10 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
       dplyr::left_join(global_p %>% dplyr::select(-dplyr::one_of("row_type")),
         by = "variable"
       ) %>%
-      dplyr::mutate_(
-        pvalue_exact = ~ ifelse(row_type == "level" & !is.na(global_pvalue), NA, pvalue_exact),
-        pvalue = ~ ifelse(row_type == "level" & !is.na(global_pvalue), NA, pvalue),
-        p_pvalue = ~ ifelse(row_type == "level" & !is.na(global_pvalue), NA, p_pvalue)
+      dplyr::mutate(
+        pvalue_exact = ifelse(.data$row_type == "level" & !is.na(.data$global_pvalue), NA, .data$pvalue_exact),
+        pvalue = ifelse(.data$row_type == "level" & !is.na(.data$global_pvalue), NA, .data$pvalue),
+        p_pvalue = ifelse(.data$row_type == "level" & !is.na(.data$global_pvalue), NA, .data$p_pvalue)
       ) %>%
       dplyr::select(-dplyr::one_of("global_pvalue"))
   }
@@ -114,8 +109,6 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
 #' Adds the global p-value for a categorical variables in `fmt_uni_regression` objects
 #'
 #' This function uses \code{\link[car]{Anova}} from the `car` package with `type = "III"` to calculate global p-values.
-#' If a needed class of model is not supported by \code{\link[car]{Anova}}, please put in an
-#' issue at https://github.mskcc.org/datadojo/biostatR/issues to request support.
 #'
 #' @param x object with class `fmt_uni_regression` from the \code{\link{fmt_uni_regression}} function
 #' @param ... arguments to be passed to \code{\link[car]{Anova}}.  Adding `test.statistic = `
@@ -140,16 +133,16 @@ add_global.fmt_uni_regression <- function(x, ...) {
       ~ car::Anova(.x, type = "III") %>%
         as.data.frame() %>%
         tibble::rownames_to_column(var = "variable") %>%
-        dplyr::filter_(~ variable == .y) %>%
+        dplyr::filter(.data$variable == .y) %>%
         dplyr::select(c("variable", dplyr::starts_with("Pr(>"))) %>% # selecting the pvalue column
         purrr::set_names(c("variable", "global_pvalue_exact"))
     ) %>%
-    dplyr::mutate_(
-      global_pvalue = ~ x$inputs$pvalue_fun(global_pvalue_exact),
-      global_p_pvalue = ~ dplyr::case_when(
-        is.na(global_pvalue) ~ NA_character_,
-        stringr::str_sub(global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", global_pvalue),
-        TRUE ~ paste0("p=", global_pvalue)
+    dplyr::mutate(
+      global_pvalue = x$inputs$pvalue_fun(.data$global_pvalue_exact),
+      global_p_pvalue = dplyr::case_when(
+        is.na(.data$global_pvalue) ~ NA_character_,
+        stringr::str_sub(.data$global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", .data$global_pvalue),
+        TRUE ~ paste0("p=", .data$global_pvalue)
       )
     ) %>%
     dplyr::select(c("variable", dplyr::starts_with("global_")))
@@ -164,13 +157,13 @@ add_global.fmt_uni_regression <- function(x, ...) {
 
   # making tbl to merge with model_tbl
   global_p_merge <-
-    dplyr::data_frame(row_type = "header1", pvalue = "p-value") %>%
+    tibble::tibble(row_type = "header1", pvalue = "p-value") %>%
     dplyr::bind_rows(
       global_p %>%
         dplyr::select(c("variable", "global_pvalue")) %>%
         purrr::set_names(c("variable", "pvalue")) %>%
-        dplyr::mutate_(
-          row_type = ~"label"
+        dplyr::mutate(
+          row_type = "label"
         )
     )
 

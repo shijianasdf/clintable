@@ -1,9 +1,9 @@
 #' Bold variable labels in Rmarkdown
 #'
-#' Bold variable labels in `biostatR` objects by adding '__'
+#' Bold variable labels by adding '__'
 #' to each side of the string
 #'
-#' @param x `biostatR` object
+#' @param x summary object
 #' @param ... further arguments passed to or from other methods.
 #' @seealso \code{\link{bold_labels.fmt_table1}},
 #' \code{\link{bold_labels.fmt_regression}},

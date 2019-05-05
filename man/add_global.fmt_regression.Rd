@@ -20,8 +20,6 @@ can change the type of test (e.g. Likelihood-ratio, Wald, etc.).}
 }
 \description{
 This function uses \code{\link[car]{Anova}} from the \code{car} package with \code{type = "III"} to calculate global p-values.
-If a needed class of model is not supported by \code{\link[car]{Anova}}, please put in an
-issue at https://github.mskcc.org/datadojo/biostatR/issues to request support.
 }
 \examples{
 lm(marker ~ stage + grade, trial) \%>\% fmt_regression() \%>\% add_global()

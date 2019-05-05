@@ -13,9 +13,6 @@ add_global(x, ...)
 }
 \description{
 This function uses \code{\link[car]{Anova}} from the \code{car} package with \code{type = "III"} to calculate global p-values.
-If a needed class of model is not supported by \code{car::}\code{\link[car]{Anova}}, please put in an
-\href{https://github.mskcc.org/datadojo/biostatR/issues}{issue} to request support.
-Output from \code{fmt_regression} and \code{fmt_uni_regression} objects supported.
 }
 \seealso{
 \code{\link{add_global.fmt_regression}}, \code{\link{add_global.fmt_uni_regression}}

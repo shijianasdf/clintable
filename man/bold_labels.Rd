@@ -7,12 +7,12 @@
 bold_labels(x, ...)
 }
 \arguments{
-\item{x}{\code{biostatR} object}
+\item{x}{summary object}
 
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-Bold variable labels in \code{biostatR} objects by adding '__'
+Bold variable labels by adding '__'
 to each side of the string
 }
 \seealso{

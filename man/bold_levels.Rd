@@ -7,12 +7,12 @@
 bold_levels(x, ...)
 }
 \arguments{
-\item{x}{\code{biostatR} object}
+\item{x}{summary object}
 
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-Bold variable levels in \code{biostatR} objects by adding '__'
+Bold variable levels by adding '__'
 to each side of the string
 }
 \seealso{

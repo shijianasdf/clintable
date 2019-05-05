@@ -1,9 +1,9 @@
 #' Italicize variable labels in Rmarkdown
 #'
-#' Italicize variable labels in `biostatR` objects by adding '_'
+#' Italicize variable labels by adding '_'
 #' to each side of the string
 #'
-#' @param x `biostatR` object
+#' @param x summary object
 #' @param ... further arguments passed to or from other methods.
 #' @seealso \code{\link{italicize_labels.fmt_table1}},
 #' \code{\link{italicize_labels.fmt_regression}},

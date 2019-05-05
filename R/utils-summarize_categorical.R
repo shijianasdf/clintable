@@ -46,17 +46,17 @@ summarize_categorical <- function(data, variable, by, var_label,
   if (!is.null(by)) {
     data <-
       data %>%
-      dplyr::mutate_(
-        .by = ~ paste0("stat_by", as.numeric(factor(.by)))
+      dplyr::mutate(
+        .by = paste0("stat_by", as.numeric(factor(.data$.by)))
       ) %>%
-      dplyr::group_by_(".by")
+      dplyr::group_by(.data$.by)
   }
 
   # counting observations within variable (and by, if specified)
   results_var_count_n <-
     data %>%
-    dplyr::filter_("!is.na(.variable)") %>%
-    dplyr::count_(~.variable) %>%
+    dplyr::filter(!is.na(.data$.variable)) %>%
+    dplyr::count(.data$.variable) %>%
     dplyr::ungroup() %>%
     tidyr::complete(!!!rlang::syms(c(dplyr::group_vars(data), ".variable")), fill = list(n = 0))
 
@@ -64,18 +64,18 @@ summarize_categorical <- function(data, variable, by, var_label,
   if (!is.null(by)) {
     results_var_count_n <-
       results_var_count_n %>%
-      dplyr::group_by_(".by")
+      dplyr::group_by(.data$.by)
   }
 
   # counting big N, and calculating percent
   results_var_count <-
     results_var_count_n %>%
-    dplyr::mutate_(
-      N = ~ sum(n),
-      p = ~ ifelse(N > 0, fmt_percent(n / N), "NA"),
-      stat = ~ glue::glue(stat_display) %>% as.character(),
-      row_type = ~"level",
-      label = ~ as.character(.variable)
+    dplyr::mutate(
+      N = sum(.data$n),
+      p = ifelse(.data$N > 0, fmt_percent(.data$n / .data$N), "NA"),
+      stat = glue::glue(stat_display) %>% as.character(),
+      row_type = "level",
+      label = as.character(.data$.variable)
     ) %>%
     dplyr::ungroup() %>%
     dplyr::select(dplyr::one_of(c(dplyr::group_vars(data), "row_type", ".variable", "label", "stat")))
@@ -83,10 +83,10 @@ summarize_categorical <- function(data, variable, by, var_label,
   # counting missing vars
   results_missing <-
     data %>%
-    dplyr::summarise_(
-      row_type = ~"missing",
-      label = ~"Unknown",
-      stat = ~ sum(is.na(.variable)) %>% as.character()
+    dplyr::summarise(
+      row_type = "missing",
+      label = "Unknown",
+      stat = sum(is.na(.data$.variable)) %>% as.character()
     )
 
   # appending missing N to bottom of data frame
@@ -113,15 +113,15 @@ summarize_categorical <- function(data, variable, by, var_label,
   if (!is.null(dichotomous_value)) {
     results_final <-
       results_wide %>%
-      dplyr::filter_(~ .variable %in% c(dichotomous_value, NA)) %>%
-      dplyr::mutate_(
-        label = ~ ifelse(!is.na(.variable), var_label, label),
-        row_type = ~ ifelse(!is.na(.variable), "label", row_type)
+      dplyr::filter(.data$.variable %in% c(dichotomous_value, NA)) %>%
+      dplyr::mutate(
+        label = ifelse(!is.na(.data$.variable), var_label, .data$label),
+        row_type = ifelse(!is.na(.data$.variable), "label", .data$row_type)
       )
   } else { # otherwise adding in a header row on top
     results_final <-
       dplyr::bind_rows(
-        dplyr::data_frame(row_type = "label", label = var_label),
+        tibble::tibble(row_type = "label", label = var_label),
         results_wide
       )
   }
@@ -134,7 +134,7 @@ summarize_categorical <- function(data, variable, by, var_label,
   if (missing == "no" | (missing == "ifany" & tot_n_miss == 0)) {
     results_final <-
       results_final %>%
-      dplyr::filter_("row_type != 'missing'")
+      dplyr::filter(.data$row_type != 'missing')
   }
 
   return(results_final)

@@ -23,7 +23,7 @@ inline_text <- function(x, ...) UseMethod("inline_text")
 #' t1 <- fmt_table1(mtcars)
 #' t2 <- fmt_table1(mtcars, by = "am")
 #' t3 <- fmt_table1(mtcars, by = "am") %>% add_overall()
-#' 
+#'
 #' inline_text(t1, "mpg") # mpg
 #' inline_text(t1, "cyl:4") # cyl=4
 #' inline_text(t2, "mpg:1") # mpg with am=1
@@ -61,7 +61,7 @@ inline_text.fmt_table1 <- function(x, cell, sep = ":", pvalue = FALSE,
     }
     return(
       x$meta_data %>%
-        dplyr::filter_(~ .variable == var) %>%
+        dplyr::filter(.data$.variable == var) %>%
         dplyr::pull(pvalue)
     )
   }
@@ -71,7 +71,7 @@ inline_text.fmt_table1 <- function(x, cell, sep = ":", pvalue = FALSE,
       stop("Cannot print p-value because it does not exist.  Run add_comparison() first.")
     }
     p <- x$meta_data %>%
-      dplyr::filter_(~ .variable == var) %>%
+      dplyr::filter(.data$.variable == var) %>%
       dplyr::pull(pvalue)
     return(
       dplyr::case_when(
@@ -84,13 +84,13 @@ inline_text.fmt_table1 <- function(x, cell, sep = ":", pvalue = FALSE,
 
   # extract summary type from x
   summary_type <- x$meta_data %>%
-    dplyr::filter_(~ .variable == var) %>%
+    dplyr::filter(.data$.variable == var) %>%
     dplyr::pull(".summary_type")
 
   # if categorical, extract level to display (always second)
   if (summary_type == "categorical") {
     if (x$table1 %>%
-      dplyr::filter_(~ .variable == var) %>%
+      dplyr::filter(.data$.variable == var) %>%
       dplyr::slice(-1) %>%
       dplyr::pull("label") %>%
       stringr::str_detect(sep) %>%
@@ -105,7 +105,7 @@ inline_text.fmt_table1 <- function(x, cell, sep = ":", pvalue = FALSE,
     level <- stringr::word(cell, 2, sep = stringr::fixed(sep))
     # CHECK!
     lvls_in_x <- x$table1 %>%
-      dplyr::filter_(~ .variable == var) %>%
+      dplyr::filter(.data$.variable == var) %>%
       dplyr::slice(-1) %>%
       dplyr::pull("label")
     if (!(level %in% lvls_in_x)) {
@@ -139,11 +139,11 @@ inline_text.fmt_table1 <- function(x, cell, sep = ":", pvalue = FALSE,
   }
 
   # filtering on the selected variable
-  results <- x$table1 %>% dplyr::filter_(~ .variable == var & row_type != "missing")
+  results <- x$table1 %>% dplyr::filter(.data$.variable == var & .data$row_type != "missing")
 
   # if categorical grabbing appropriate level
   if (summary_type == "categorical") {
-    results <- results %>% dplyr::filter_(~ label == level)
+    results <- results %>% dplyr::filter(.data$label == level)
   }
 
   # if no by variable, grabbing stat column, otherwise grabbing by var column
@@ -151,7 +151,7 @@ inline_text.fmt_table1 <- function(x, cell, sep = ":", pvalue = FALSE,
     results <- results %>% dplyr::pull("stat_overall")
   } else {
     col_name <- by_dta %>%
-      dplyr::filter_(~ by_chr == by_val) %>%
+      dplyr::filter(.data$by_chr == by_val) %>%
       dplyr::pull("by_col")
     results <- results %>% dplyr::pull(col_name)
   }
@@ -176,9 +176,9 @@ inline_text.fmt_table1 <- function(x, cell, sep = ":", pvalue = FALSE,
 #' mod <- glm(response ~ age + grade + stage, trial, family = binomial(link = "logit")) %>%
 #'   fmt_regression(exponentiate = TRUE)
 #' inline_text(mod, "age")
-#' 
+#'
 #' inline_text(mod, "grade:III")
-#' 
+#'
 #' trial %>%
 #'   fmt_uni_regression(
 #'     method = "lm",
@@ -209,14 +209,14 @@ inline_text.fmt_regression <- function(x, cell, stat = "{est} (95% CI {ci}; {p_p
 
   # extract summary type from x
   summary_type <- x$model_tbl %>%
-    dplyr::filter_(~ variable == var) %>%
+    dplyr::filter(.data$variable == var) %>%
     dplyr::pull("var_type") %>%
     unique()
 
   # if categorical, extract level to display (always second)
   if (summary_type == "categorical") {
     if (x$model_tbl %>%
-      dplyr::filter_(~ variable == var) %>%
+      dplyr::filter(.data$variable == var) %>%
       dplyr::slice(-1) %>%
       dplyr::pull("label") %>%
       stringr::str_detect(sep) %>%
@@ -231,7 +231,7 @@ inline_text.fmt_regression <- function(x, cell, stat = "{est} (95% CI {ci}; {p_p
     level <- stringr::word(cell, 2, sep = stringr::fixed(sep))
     # CHECK!
     lvls_in_x <- x$model_tbl %>%
-      dplyr::filter_(~ variable == var) %>%
+      dplyr::filter(.data$variable == var) %>%
       dplyr::slice(-1) %>%
       dplyr::pull("label")
     if (!(level %in% lvls_in_x)) {
@@ -244,18 +244,18 @@ inline_text.fmt_regression <- function(x, cell, stat = "{est} (95% CI {ci}; {p_p
 
 
   # filtering on the selected variable
-  results <- x$model_tbl %>% dplyr::filter_(~ variable == var)
+  results <- x$model_tbl %>% dplyr::filter(.data$variable == var)
 
   # if categorical grabbing appropriate level
   if (summary_type == "categorical") {
-    results <- results %>% dplyr::filter_(~ label == level)
+    results <- results %>% dplyr::filter(.data$label == level)
   }
 
   # calculating statistic to be returned
   results <-
     results %>%
-    dplyr::mutate_(
-      stat_return = ~ as.character(glue::glue(stat))
+    dplyr::mutate(
+      stat_return = as.character(glue::glue(stat))
     ) %>%
     dplyr::pull("stat_return")
 

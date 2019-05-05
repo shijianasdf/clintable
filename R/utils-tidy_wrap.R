@@ -42,7 +42,7 @@ tidy_wrap <- function(x, exponentiate, conf.level) {
   if (class(x)[1] == "survreg") {
     return(
       tidy_bit %>%
-        dplyr::filter_(~ term != "Log(scale)")
+        dplyr::filter(.data$term != "Log(scale)")
     )
   }
 

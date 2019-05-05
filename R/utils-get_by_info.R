@@ -15,14 +15,14 @@ get_by_info <- function(data, by) {
     data %>%
     dplyr::select(dplyr::one_of(by)) %>%
     dplyr::distinct() %>%
-    dplyr::arrange_(by)
+    dplyr::arrange(.data[[by]])
   by_info <-
     by_info %>%
-    dplyr::mutate_(
-      by = ~ by_info[[by]], # Unique values of 'by' variable, sorted
-      by_id = ~ 1:n(), # 'by' variable ID
-      by_chr = ~ as.character(by), # Character version of 'by' variable
-      by_col = ~ paste0("stat_by", by_id) # Column name of in fmt_table1 output
+    dplyr::mutate(
+      by = by_info[[by]], # Unique values of 'by' variable, sorted
+      by_id = 1:dplyr::n(), # 'by' variable ID
+      by_chr = as.character(.data$by), # Character version of 'by' variable
+      by_col = paste0("stat_by", .data$by_id) # Column name of in fmt_table1 output
     )
   return(by_info)
 }

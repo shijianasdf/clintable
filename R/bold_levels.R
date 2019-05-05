@@ -1,9 +1,9 @@
 #' Bold variable levels in Rmarkdown
 #'
-#' Bold variable levels in `biostatR` objects by adding '__'
+#' Bold variable levels by adding '__'
 #' to each side of the string
 #'
-#' @param x `biostatR` object
+#' @param x summary object
 #' @param ... further arguments passed to or from other methods.
 #' @seealso \code{\link{bold_levels.fmt_table1}},
 #' \code{\link{bold_levels.fmt_regression}},
