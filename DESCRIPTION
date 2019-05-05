@@ -9,7 +9,8 @@ Authors@R:
 Description: The gtsummary package creates
     presentation-ready tables summarizing data sets, regression models,
     and more. The code to create the tables is concise and highly
-    customizable. Data frames can be summarized with many functions.
+    customizable. Data frames can be summarized with many types
+    of statistics presented in any pattern. 
     Regression models are summarized including the reference row for
     categorical independent variables.
 License: MIT + file LICENSE
