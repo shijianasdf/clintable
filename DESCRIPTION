@@ -35,7 +35,7 @@ Suggests:
     kableExtra (>= 0.9.0),
     lme4 (>= 1.1.18.1),
     rmarkdown (>= 1.11),
-    spelling,
+    spelling (>= 2.1),
     survival,
     testthat (>= 2.0.0)
 VignetteBuilder: 
