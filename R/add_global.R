@@ -100,10 +100,10 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
       dplyr::left_join(global_p %>% dplyr::select(-dplyr::one_of("row_type")),
         by = "variable"
       ) %>%
-      dplyr::mutate_(
-        pvalue_exact = ~ ifelse(row_type == "level" & !is.na(global_pvalue), NA, pvalue_exact),
-        pvalue = ~ ifelse(row_type == "level" & !is.na(global_pvalue), NA, pvalue),
-        p_pvalue = ~ ifelse(row_type == "level" & !is.na(global_pvalue), NA, p_pvalue)
+      dplyr::mutate(
+        pvalue_exact = ifelse(row_type == "level" & !is.na(.data$global_pvalue), NA, .data$pvalue_exact),
+        pvalue = ifelse(row_type == "level" & !is.na(.data$global_pvalue), NA, .data$pvalue),
+        p_pvalue = ifelse(row_type == "level" & !is.na(.data$global_pvalue), NA, .data$p_pvalue)
       ) %>%
       dplyr::select(-dplyr::one_of("global_pvalue"))
   }
@@ -144,12 +144,12 @@ add_global.fmt_uni_regression <- function(x, ...) {
         dplyr::select(c("variable", dplyr::starts_with("Pr(>"))) %>% # selecting the pvalue column
         purrr::set_names(c("variable", "global_pvalue_exact"))
     ) %>%
-    dplyr::mutate_(
-      global_pvalue = ~ x$inputs$pvalue_fun(global_pvalue_exact),
-      global_p_pvalue = ~ dplyr::case_when(
-        is.na(global_pvalue) ~ NA_character_,
-        stringr::str_sub(global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", global_pvalue),
-        TRUE ~ paste0("p=", global_pvalue)
+    dplyr::mutate(
+      global_pvalue = x$inputs$pvalue_fun(global_pvalue_exact),
+      global_p_pvalue = dplyr::case_when(
+        is.na(.data$global_pvalue) ~ NA_character_,
+        stringr::str_sub(.data$global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", .data$global_pvalue),
+        TRUE ~ paste0("p=", .data$global_pvalue)
       )
     ) %>%
     dplyr::select(c("variable", dplyr::starts_with("global_")))
@@ -169,8 +169,8 @@ add_global.fmt_uni_regression <- function(x, ...) {
       global_p %>%
         dplyr::select(c("variable", "global_pvalue")) %>%
         purrr::set_names(c("variable", "pvalue")) %>%
-        dplyr::mutate_(
-          row_type = ~"label"
+        dplyr::mutate(
+          row_type = "label"
         )
     )
 

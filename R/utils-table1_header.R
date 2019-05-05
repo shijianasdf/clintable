@@ -39,15 +39,15 @@ fmt_table1_header <- function(data, by, pvalue) {
   # if there is a pvalue column, adding header
   if (pvalue == TRUE) {
     fmt_table1_header <- fmt_table1_header %>%
-      dplyr::mutate_(
-        .p = ~ ifelse(dplyr::row_number() == 1, "p-value", NA_character_)
+      dplyr::mutate(
+        .p = ifelse(dplyr::row_number() == 1, "p-value", NA_character_)
       )
   }
 
   # adding row_type
   fmt_table1_header <- fmt_table1_header %>%
-    dplyr::mutate_(
-      .row_type = ~ paste0("header", dplyr::n():1)
+    dplyr::mutate(
+      .row_type = paste0("header", dplyr::n():1)
     )
 
   return(fmt_table1_header)

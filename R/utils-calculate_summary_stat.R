@@ -50,7 +50,7 @@ calculate_summary_stat <- function(data, variable, by, summary_type,
               tibble::as_tibble() %>%
               dplyr::mutate_all(as.character) %>%
               purrr::set_names(stat_col_names) %>%
-              dplyr::mutate_(row_type = ~"missing")
+              dplyr::mutate(row_type = "missing")
           )
       )
     }
