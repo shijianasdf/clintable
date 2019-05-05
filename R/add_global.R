@@ -68,13 +68,13 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
     purrr::set_names(c("variable", "global_pvalue_exact"))
 
   global_p <- global_p %>%
-    dplyr::mutate_(
-      row_type = ~"label",
-      global_pvalue = ~ x$inputs$pvalue_fun(global_pvalue_exact),
-      global_p_pvalue = ~ dplyr::case_when(
-        is.na(global_pvalue) ~ NA_character_,
-        stringr::str_sub(global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", global_pvalue),
-        TRUE ~ paste0("p=", global_pvalue)
+    dplyr::mutate(
+      row_type = "label",
+      global_pvalue = x$inputs$pvalue_fun(global_pvalue_exact),
+      global_p_pvalue = dplyr::case_when(
+        is.na(.data$global_pvalue) ~ NA_character_,
+        stringr::str_sub(.data$global_pvalue, end = 1L) %in% c("<", ">") ~ paste0("p", .data$global_pvalue),
+        TRUE ~ paste0("p=", .data$global_pvalue)
       )
     ) %>%
     dplyr::select(c("row_type", "variable", dplyr::starts_with("global_")))
@@ -86,10 +86,10 @@ add_global.fmt_regression <- function(x, terms = NULL, keep = FALSE, ...) {
       global_p,
       by = c("row_type", "variable")
     ) %>%
-    dplyr::mutate_(
-      pvalue_exact = ~ dplyr::coalesce(global_pvalue_exact, pvalue_exact),
-      pvalue = ~ dplyr::coalesce(global_pvalue, pvalue),
-      p_pvalue = ~ dplyr::coalesce(global_p_pvalue, p_pvalue)
+    dplyr::mutate(
+      pvalue_exact = dplyr::coalesce(.data$global_pvalue_exact, .data$pvalue_exact),
+      pvalue = dplyr::coalesce(.data$global_pvalue, .data$pvalue),
+      p_pvalue = dplyr::coalesce(.data$global_p_pvalue, .data$p_pvalue)
     ) %>%
     dplyr::select(-dplyr::starts_with("global_"))
 
