@@ -55,7 +55,7 @@ summarize_categorical <- function(data, variable, by, var_label,
   # counting observations within variable (and by, if specified)
   results_var_count_n <-
     data %>%
-    dplyr::filter_("!is.na(.variable)") %>%
+    dplyr::filter(!is.na(.data$.variable)) %>%
     dplyr::count(.data$.variable) %>%
     dplyr::ungroup() %>%
     tidyr::complete(!!!rlang::syms(c(dplyr::group_vars(data), ".variable")), fill = list(n = 0))
@@ -113,7 +113,7 @@ summarize_categorical <- function(data, variable, by, var_label,
   if (!is.null(dichotomous_value)) {
     results_final <-
       results_wide %>%
-      dplyr::filter_(~ .variable %in% c(dichotomous_value, NA)) %>%
+      dplyr::filter(.data$.variable %in% c(dichotomous_value, NA)) %>%
       dplyr::mutate(
         label = ifelse(!is.na(.data$.variable), var_label, .data$label),
         row_type = ifelse(!is.na(.data$.variable), "label", .data$row_type)
@@ -134,7 +134,7 @@ summarize_categorical <- function(data, variable, by, var_label,
   if (missing == "no" | (missing == "ifany" & tot_n_miss == 0)) {
     results_final <-
       results_final %>%
-      dplyr::filter_("row_type != 'missing'")
+      dplyr::filter(.data$row_type != 'missing')
   }
 
   return(results_final)

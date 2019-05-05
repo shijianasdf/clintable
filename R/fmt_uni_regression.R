@@ -123,13 +123,13 @@ fmt_uni_regression <- function(data, method, y, method.args = NULL,
   # creating a meta_data table (this will be used in subsequent functions, eg add_global)
   meta_data <-
     model_tbl %>%
-    dplyr::filter_(~ row_type == "label") %>%
+    dplyr::filter(.data$row_type == "label") %>%
     dplyr::select(c("variable", "var_type", "label", "N")) %>%
     dplyr::mutate(
       N_levels = purrr::map2_int(
         .data$variable, .data$var_type,
         ~ ifelse(..2 == "categorical",
-          model_tbl %>% dplyr::filter_(~ variable == ..1 & row_type == "level") %>% nrow(),
+          model_tbl %>% dplyr::filter(.data$variable == ..1 & .data$row_type == "level") %>% nrow(),
           NA_integer_
         )
       )
@@ -140,7 +140,7 @@ fmt_uni_regression <- function(data, method, y, method.args = NULL,
   header_n <- as.numeric(gsub("[[:alpha:]]", "", model_tbl$row_type[1]))
   model_tbl <-
     model_tbl %>%
-    dplyr::filter_(~ !startsWith(row_type, "header") | dplyr::row_number() <= header_n) %>%
+    dplyr::filter(!startsWith(.data$row_type, "header") | dplyr::row_number() <= header_n) %>%
     dplyr::mutate(
       N = dplyr::case_when(
         .data$row_type == "label" ~ N %>% as.character(),

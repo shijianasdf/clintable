@@ -105,7 +105,7 @@ summarize_continuous <- function(data, variable, by, digits,
   if (missing == "no" | (missing == "ifany" & tot_n_miss == 0)) {
     results_wide <-
       results_wide %>%
-      dplyr::filter_("row_type != 'missing'")
+      dplyr::filter(.data$row_type != 'missing')
   }
 
   return(results_wide)

@@ -119,7 +119,7 @@ bold_p.fmt_uni_regression <- function(x, t = 0.05, q = FALSE, ...) {
     ("global_pvalue" %in% colnames(x$meta_data))) {
     var_sig <-
       x$meta_data %>%
-      dplyr::filter_(~ global_pvalue_exact < t) %>%
+      dplyr::filter(.data$global_pvalue_exact < t) %>%
       dplyr::pull("variable")
 
     x$model_tbl <-
@@ -138,7 +138,7 @@ bold_p.fmt_uni_regression <- function(x, t = 0.05, q = FALSE, ...) {
     # This replaces p-values for var_sig variables with bolded p-values
     var_sig <-
       x$meta_data %>%
-      dplyr::filter_(~ qvalue_exact < t) %>%
+      dplyr::filter(.data$qvalue_exact < t) %>%
       dplyr::pull("variable")
 
     x$model_tbl <-
