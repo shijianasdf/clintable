@@ -17,3 +17,15 @@
 \description{
 Print \code{fmt_uni_regression} objects in Rmarkdown
 }
+\examples{
+\dontrun{
+fmt_uni_regression(
+  trial,
+  method = "glm",
+  y = "response",
+  method.args = list(family = binomial),
+  exponentiate = TRUE
+) \%>\%
+  print()
+}
+}

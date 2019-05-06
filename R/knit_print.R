@@ -19,6 +19,10 @@ NULL
 #' @param ... further arguments passed to \code{\link[knitr]{kable}}.
 #' @name knit_print.fmt_table1
 #' @export
+#' @examples
+#' \dontrun{
+#' fmt_table1(trial, by = "trt") %>% knit_print()
+#' }
 knit_print.fmt_table1 <- function(x, options, ...) {
   # extracting columns to print from list
   t <- x %>%
@@ -44,6 +48,12 @@ knit_print.fmt_table1 <- function(x, options, ...) {
 #' @param ... further arguments passed to \code{\link[knitr]{kable}}.
 #' @name knit_print.fmt_regression
 #' @export
+#' @examples
+#' \dontrun{
+#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#'   fmt_regression() %>%
+#'   knit_print()
+#' }
 knit_print.fmt_regression <- function(x, options, ...) {
   # extracting columns to print from list
   t <- x %>%
@@ -70,6 +80,17 @@ knit_print.fmt_regression <- function(x, options, ...) {
 #' @param ... further arguments passed to `knitr::kable()`.
 #' @name knit_print.fmt_uni_regression
 #' @export
+#' @examples
+#' \dontrun{
+#' fmt_uni_regression(
+#'   trial,
+#'   method = "glm",
+#'   y = "response",
+#'   method.args = list(family = binomial),
+#'   exponentiate = TRUE
+#' ) %>%
+#'   print()
+#' }
 knit_print.fmt_uni_regression <- function(x, options, ...) {
   # extracting columns to print from list
   t <- x %>%

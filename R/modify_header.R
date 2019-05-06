@@ -137,6 +137,10 @@ modify_header.fmt_table1 <- function(x, label = NULL, stat_by = NULL,
 #' @param pvalue string vector including text to appear above the p-value column
 #' @param ...	further arguments passed to or from other methods
 #' @export
+#' @examples
+#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#'   fmt_regression() %>%
+#'   modify_header(label = "Characteristic")
 
 modify_header.fmt_regression <- function(x, label = NULL, est = NULL,
                                          ci = NULL, pvalue = NULL, ...) {
@@ -251,6 +255,15 @@ first_row_missing <- function(x) {
 #' @param pvalue string vector including text to appear above the p-value column
 #' @param ...	further arguments passed to or from other methods
 #' @export
+#' @examples
+#' fmt_uni_regression(
+#'   trial,
+#'   method = "glm",
+#'   y = "response",
+#'   method.args = list(family = binomial),
+#'   exponentiate = TRUE
+#' ) %>%
+#'   modify_header(label = "Characteristic")
 
 modify_header.fmt_uni_regression <- function(x, label = NULL, N = NULL, est = NULL,
                                              ci = NULL, pvalue = NULL, ...) {

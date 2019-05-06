@@ -21,6 +21,16 @@ Convert \code{fmt_uni_regression} objects to data frame
 \details{
 as_data_frame.fmt_uni_regression is alias.
 }
+\examples{
+fmt_uni_regression(
+  trial,
+  method = "glm",
+  y = "response",
+  method.args = list(family = binomial),
+  exponentiate = TRUE
+) \%>\%
+  as_tibble()
+}
 \seealso{
 \code{\link{fmt_uni_regression}}, \code{\link{as_tibble.fmt_table1}},
 \code{\link{as_tibble.fmt_regression}}, \code{\link[tibble]{as_tibble}}

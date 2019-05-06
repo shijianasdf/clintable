@@ -14,3 +14,6 @@
 \description{
 Print \code{fmt_table1} objects
 }
+\examples{
+fmt_table1(trial, by = "trt") \%>\% print()
+}

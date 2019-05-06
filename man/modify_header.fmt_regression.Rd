@@ -24,3 +24,8 @@
 If the top row of a header column is blank,
 you may experience printing issues when using \code{knitr}::\code{\link[knitr]{kable}}
 }
+\examples{
+lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+  fmt_regression() \%>\%
+  modify_header(label = "Characteristic")
+}
