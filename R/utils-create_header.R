@@ -37,7 +37,6 @@
 #'   stat_by = c("{level}", "N = {n}"),
 #'   label = c("Variables", "")
 #' )
-#' @export
 
 create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
                           stat_by = NULL, stat_overall = NULL, pvalue = NULL,

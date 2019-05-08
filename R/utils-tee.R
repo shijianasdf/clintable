@@ -4,6 +4,5 @@
 #'
 #' @name %T>%
 #' @keywords internal
-#' @export
 #' @importFrom magrittr %T>%
 NULL

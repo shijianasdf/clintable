@@ -3,11 +3,8 @@
 #'
 #' @param x vector containing the values of a continuous variable. This can be
 #' raw data values or a vector of summary statistics themselves
-#'
 #' @return the rounded values
-#'
 #' @keywords internal
-#'
 
 # takes as the input a vector of variable and summary types
 continuous_digits_guess <- function(data,
