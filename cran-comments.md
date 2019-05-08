@@ -1,14 +1,9 @@
 ## Resubmission Updates
 
-Thank you for taking the time to review my package submission (original submission date 2019-05-05).  The following updates have been in response to the CRAN review.  
+Thank you for taking the time to review my package submission (previous submission date 2019-05-06).  The following updates have been in response to the CRAN review.  
 
-* Examples have been added to all function help files.  Documentation files (data.R and gtsummary-package.R) and S3 generic functions do not have examples.  The S3 generic functions include a seealso link to the S3 methods functions, and all method functions have examples.
-
-* All examples wrapped within /dontrun{} indeed cannot be run in the R console--they are run in an R markdown setting.
-
-* Description updated to remove redundant "The gtsummary package..." text.  
-
-* Reference to a published paper has been added to the package description.  
+* There were two internal functions that were mistakenly exported (`create_header()` and `%T>%`).  These functions no longer appear in the NAMESPACE.
+  
 
 ## Test environments
 * local Windows 10 Enterprise install, R 3.5.3
