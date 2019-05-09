@@ -1,8 +1,12 @@
 ## Resubmission Updates
 
-Thank you for taking the time to review my package submission (previous submission date 2019-05-06).  The following updates have been in response to the CRAN review.  
+Thank you for taking the time to review my package submission (previous submission date 2019-05-08).  The following updates have been in response to the CRAN review.  
 
-* There were two internal functions that were mistakenly exported (`create_header()` and `%T>%`).  These functions no longer appear in the NAMESPACE.
+* The dontrun tag has been replaced with donttest in *.Rd files
+
+* The package title is now in title case
+
+* For unexported function examples in documentation, `gtsummary:::` has been prepended to each function call
   
 
 ## Test environments
