@@ -8,7 +8,6 @@
 #' @param test list of statistical tests from meta data
 #' @return a table of p-values for each variable
 #' @keywords internal
-#'
 
 calculate_pvalue <- function(data, variable, by, test, type, id) {
   purrr::pmap_dbl(

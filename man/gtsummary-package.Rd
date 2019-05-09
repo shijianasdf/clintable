@@ -4,7 +4,7 @@
 \name{gtsummary-package}
 \alias{gtsummary}
 \alias{gtsummary-package}
-\title{gtsummary: Presentation-ready Data Summary Tables}
+\title{gtsummary: Presentation-Ready Data Summary Tables}
 \description{
 Creates
     presentation-ready tables summarizing data sets, regression models,

@@ -17,7 +17,7 @@
 Print \code{fmt_table1} objects in Rmarkdown
 }
 \examples{
-\dontrun{
+\donttest{
 fmt_table1(trial, by = "trt") \%>\% knit_print()
 }
 }

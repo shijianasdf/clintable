@@ -15,21 +15,22 @@
 Makes index of factors requiring indent from \code{fmt_table1} objects in Rmarkdown
 }
 \examples{
-\dontrun{
-t1 <- trial \%>\%
-  fmt_table1() \%>\%
-  bold_labels()
+\donttest{
+  t1 <-
+    trial \%>\%
+    fmt_table1() \%>\%
+    bold_labels()
 
-knitr::kable(as_tibble(t1),
-  row.names = FALSE,
-  caption = "Table 1: Summary of Patient and Clinical Variables"
-) \%>\%
-  kableExtra::kable_styling(
-    bootstrap_options = c("condensed"),
-    font_size = 11,
-    full_width = F
+  knitr::kable(as_tibble(t1),
+    row.names = FALSE,
+    caption = "Table 1: Summary of Patient and Clinical Variables"
   ) \%>\%
-  kableExtra::add_indent(indent_key(t1))
+    kableExtra::kable_styling(
+      bootstrap_options = c("condensed"),
+      font_size = 11,
+      full_width = F
+    ) \%>\%
+    kableExtra::add_indent(indent_key(t1))
 }
 
 }

@@ -13,10 +13,13 @@
 #' @return Vector summary types `c("continuous", "categorical", "dichotomous")`.
 #' @keywords internal
 #' @examples
-#' # assign_summary_type(data = mtcars,
-#' #                     variable =  names(mtcars),
-#' #                     class = apply(mtcars, 2, class),
-#' #                     summary_type = NULL)
+#' gtsummary:::assign_summary_type(
+#'   data = mtcars,
+#'   variable =  names(mtcars),
+#'   class = apply(mtcars, 2, class),
+#'   summary_type = NULL
+#' )
+
 assign_summary_type <- function(data, variable, class, summary_type) {
   purrr::map2_chr(
     variable, class,

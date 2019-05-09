@@ -20,7 +20,7 @@ NULL
 #' @name knit_print.fmt_table1
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' fmt_table1(trial, by = "trt") %>% knit_print()
 #' }
 knit_print.fmt_table1 <- function(x, options, ...) {
@@ -49,7 +49,7 @@ knit_print.fmt_table1 <- function(x, options, ...) {
 #' @name knit_print.fmt_regression
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' lm(hp ~ mpg + factor(cyl), mtcars) %>%
 #'   fmt_regression() %>%
 #'   knit_print()
@@ -81,7 +81,7 @@ knit_print.fmt_regression <- function(x, options, ...) {
 #' @name knit_print.fmt_uni_regression
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' fmt_uni_regression(
 #'   trial,
 #'   method = "glm",

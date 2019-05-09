@@ -1,5 +1,5 @@
 Package: gtsummary
-Title: Presentation-ready Data Summary Tables
+Title: Presentation-Ready Data Summary Tables
 Version: 0.1.0
 Authors@R: 
     c(person(given = "Daniel D.",

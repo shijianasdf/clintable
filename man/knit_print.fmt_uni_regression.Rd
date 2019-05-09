@@ -18,7 +18,7 @@
 Print \code{fmt_uni_regression} objects in Rmarkdown
 }
 \examples{
-\dontrun{
+\donttest{
 fmt_uni_regression(
   trial,
   method = "glm",
