@@ -6,7 +6,7 @@
 [![Travis build
 status](https://travis-ci.org/ddsjoberg/gtsummary-v0.1.svg?branch=master)](https://travis-ci.org/ddsjoberg/gtsummary-v0.1)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/ddsjoberg/gtsummary-v0.1?branch=master&svg=true)](https://ci.appveyor.com/project/ddsjoberg/gtsummary-v0.1)
+status](https://ci.appveyor.com/api/projects/status/github/ddsjoberg/gtsummary-v0-1?branch=master&svg=true)](https://ci.appveyor.com/project/ddsjoberg/gtsummary-v0-1)
 [![Coverage
 status](https://codecov.io/gh/ddsjoberg/gtsummary-v0.1/branch/master/graph/badge.svg)](https://codecov.io/github/ddsjoberg/gtsummary-v0.1?branch=master)  
 A collection of functions commonly used in the work of the
