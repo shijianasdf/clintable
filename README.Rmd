@@ -23,15 +23,14 @@ A collection of functions commonly used in the work of the biostatisticians. The
 You can install the production version of **gtsummary** with:
 
 ``` r
-install.packages("remotes")
-remotes::install_url("https://github.com/ddsjoberg/clintable/archive/master.zip")
+install.packages("gtsummary")
 ```
 
 and the development version with:
 
 ``` r
 install.packages("remotes")
-remotes::install_url("https://github.com/ddsjoberg/clintable/archive/dev.zip")
+remotes::install_url("https://github.com/ddsjoberg/clintable/archive/master.zip")
 ```
 
 ## Examples
