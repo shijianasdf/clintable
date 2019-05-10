@@ -4,6 +4,8 @@
 #' @param ... further arguments passed to or from other methods.
 #' @name print.fmt_table1
 #' @export
+#' @examples
+#' fmt_table1(trial, by = "trt") %>% print()
 print.fmt_table1 <- function(x, ...) {
   cat("\n")
   x %>%
@@ -22,6 +24,11 @@ print.fmt_table1 <- function(x, ...) {
 #' @param ... further arguments passed to or from other methods.
 #' @name print.fmt_regression
 #' @export
+#' @examples
+#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#'   fmt_regression() %>%
+#'   print()
+
 print.fmt_regression <- function(x, ...) {
   cat("\n")
   x %>%
@@ -40,6 +47,16 @@ print.fmt_regression <- function(x, ...) {
 #' @param ... further arguments passed to or from other methods.
 #' @name print.fmt_uni_regression
 #' @export
+#' @examples
+#' fmt_uni_regression(
+#'   trial,
+#'   method = "glm",
+#'   y = "response",
+#'   method.args = list(family = binomial),
+#'   exponentiate = TRUE
+#' ) %>%
+#'   print()
+
 print.fmt_uni_regression <- function(x, ...) {
   cat("\n")
   x %>%

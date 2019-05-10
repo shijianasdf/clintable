@@ -23,6 +23,6 @@ argument, then to a label attribute attached to the data frame
 (i.e. attr(data$var, "label)), then to the variable name.
 }
 \examples{
-# assign_var_label(mtcars, names(mtcars), list(hp = "Horsepower"))
+gtsummary:::assign_var_label(mtcars, names(mtcars), list(hp = "Horsepower"))
 }
 \keyword{internal}

@@ -17,3 +17,8 @@ Default is \code{TRUE}}
 \description{
 Renames columns to values in a row of data frame
 }
+\examples{
+fmt_table1(trial, by = "trt") \%>\%
+  purrr::pluck("table1") \%>\%
+  row_to_name()
+}

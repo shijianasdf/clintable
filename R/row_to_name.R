@@ -5,6 +5,10 @@
 #' @param delete_row logical argument whether to delete row after renaming.
 #' Default is `TRUE`
 #' @export
+#' @examples
+#' fmt_table1(trial, by = "trt") %>%
+#'   purrr::pluck("table1") %>%
+#'   row_to_name()
 
 row_to_name <- function(data, row_n = 1, delete_row = TRUE) {
   # replacing column names with values from the first row in the data frame

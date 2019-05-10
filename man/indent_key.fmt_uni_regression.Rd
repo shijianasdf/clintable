@@ -17,21 +17,21 @@ Makes index of factor variables requiring indent from
 \code{fmt_regression} objects in Rmarkdown
 }
 \examples{
-\dontrun{
-library(lme4)
-uni_mod <- fmt_uni_regression(trial,
-  method = "glm",
-  y = "response",
-  method.args = list(family = binomial),
-  exponentiate = TRUE
-)
+\donttest{
+  library(lme4)
+  uni_mod <- fmt_uni_regression(trial,
+    method = "glm",
+    y = "response",
+    method.args = list(family = binomial),
+    exponentiate = TRUE
+  )
 
-# In RMarkdown, knitting to HTML:
-kable(as_tibble(uni_mod),
-  row.names = FALSE,
-  caption = "Model Summary"
-) \%>\%
-  kableExtra::add_indent(indent_key(uni_mod))
+  # In RMarkdown, knitting to HTML:
+  kable(as_tibble(uni_mod),
+    row.names = FALSE,
+    caption = "Model Summary"
+  ) \%>\%
+    kableExtra::add_indent(indent_key(uni_mod))
 }
 
 }

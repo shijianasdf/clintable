@@ -11,7 +11,7 @@
 #' @return Vector variable labels.
 #' @keywords internal
 #' @examples
-#' # assign_var_label(mtcars, names(mtcars), list(hp = "Horsepower"))
+#' gtsummary:::assign_var_label(mtcars, names(mtcars), list(hp = "Horsepower"))
 assign_var_label <- function(data, variable, var_label) {
   purrr::map_chr(
     variable,

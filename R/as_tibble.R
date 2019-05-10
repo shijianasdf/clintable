@@ -26,6 +26,10 @@ NULL
 #' @name as_tibble.fmt_table1
 #' @aliases as_data_frame.fmt_table1
 #' @export
+#' @examples
+#' fmt_table1(trial, by = "trt") %>%
+#'   as_tibble()
+
 as_tibble.fmt_table1 <- function(x, ...) {
   table_extra <- x %>%
     purrr::pluck("table1") %>%
@@ -50,6 +54,13 @@ as_data_frame.fmt_table1 <- as_tibble.fmt_table1
 #' @name as_tibble.fmt_regression
 #' @aliases as_data_frame.fmt_regression
 #' @export
+#' @examples
+#' glm(response ~ age + stage + grade,
+#'     trial,
+#'     family = binomial(link = "logit")) %>%
+#'   fmt_regression(exponentiate = TRUE) %>%
+#'   as_tibble()
+
 as_tibble.fmt_regression <- function(x, ...) {
   table_extra <- x %>%
     purrr::pluck("model_tbl") %>%
@@ -74,6 +85,16 @@ as_data_frame.fmt_regression <- as_tibble.fmt_regression
 #' @aliases as_data_frame.fmt_uni_regression
 #' @name as_tibble.fmt_uni_regression
 #' @export
+#' @examples
+#' fmt_uni_regression(
+#'   trial,
+#'   method = "glm",
+#'   y = "response",
+#'   method.args = list(family = binomial),
+#'   exponentiate = TRUE
+#' ) %>%
+#'   as_tibble()
+
 as_tibble.fmt_uni_regression <- function(x, ...) {
   table_extra <- x %>%
     purrr::pluck("model_tbl") %>%

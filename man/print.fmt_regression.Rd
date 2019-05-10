@@ -15,3 +15,8 @@
 \description{
 Print \code{fmt_regression} objects
 }
+\examples{
+lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+  fmt_regression() \%>\%
+  print()
+}

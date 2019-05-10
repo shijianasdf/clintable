@@ -21,6 +21,13 @@ Convert \code{fmt_regression} objects to data frame
 \details{
 as_data_frame.fmt_regression is alias.
 }
+\examples{
+glm(response ~ age + stage + grade,
+    trial,
+    family = binomial(link = "logit")) \%>\%
+  fmt_regression(exponentiate = TRUE) \%>\%
+  as_tibble()
+}
 \seealso{
 \code{\link{fmt_regression}}, \code{\link{as_tibble.fmt_table1}},
 \code{\link{as_tibble.fmt_uni_regression}}, \code{\link[tibble]{as_tibble}}

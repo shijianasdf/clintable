@@ -16,3 +16,10 @@
 \description{
 Print \code{fmt_regression} objects in Rmarkdown
 }
+\examples{
+\donttest{
+lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+  fmt_regression() \%>\%
+  knit_print()
+}
+}

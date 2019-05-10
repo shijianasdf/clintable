@@ -26,18 +26,6 @@
 #' @param ci string vector including text to appear above the confidence interval
 #' column. `fmt_regression` only.
 #' @keywords internal
-#' @examples
-#' create_header(
-#'   data = mtcars,
-#'   stat_overall = c("Overall", "N = {N}"),
-#'   pvalue = c("p-value", "")
-#' )
-#' create_header(
-#'   data = mtcars, by = "am",
-#'   stat_by = c("{level}", "N = {n}"),
-#'   label = c("Variables", "")
-#' )
-#' @export
 
 create_header <- function(data = NULL, by = NULL, mod = NULL, label = NULL,
                           stat_by = NULL, stat_overall = NULL, pvalue = NULL,

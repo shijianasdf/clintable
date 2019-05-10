@@ -174,7 +174,7 @@ Need a data frame for any reason (e.g. if you want to get extra fancy with `kabl
 tab1_df <- as_tibble(tab1)
 ```
 
-If you want to customize anything with `knitr::kable` or [`kableExtra`](https://cran.r-project.org/package=kableExtra), you can use the above `as_tibble` along with the function `indent_key` which extracts the row numbers you want indented when knitting your table to HTML. (NOTE: Only load `library(kableExtra)` and use the below if knitting to HTML, this will not work with Word or PDF.)  For more on customizing your tables with `kableExtra` check out the package's [vignette on HTML output](https://haozhu233.github.io/kableExtra/awesome_table_in_html.html).
+If you want to customize anything with `knitr::kable` or [`kableExtra`](https://CRAN.R-project.org/package=kableExtra), you can use the above `as_tibble` along with the function `indent_key` which extracts the row numbers you want indented when knitting your table to HTML. (NOTE: Only load `library(kableExtra)` and use the below if knitting to HTML, this will not work with Word or PDF.)  For more on customizing your tables with `kableExtra` check out the package's [vignette on HTML output](https://haozhu233.github.io/kableExtra/awesome_table_in_html.html).
 
 ```{r, message=FALSE}
 # knit pretty table

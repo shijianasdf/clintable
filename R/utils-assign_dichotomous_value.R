@@ -5,7 +5,6 @@
 #' @param summary_type the type of summary statistics that will be calculated
 #' @param class class of \code{variable}
 #' @return value that will be printed in table for dichotomous data
-#'
 #' @keywords internal
 
 # wrapper for assign_dichotomous_value_one() function

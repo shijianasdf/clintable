@@ -45,16 +45,4 @@ This function takes in a data frame and information to include in the header
 rows.  The user will rarely call this function directly, rather they will use a
 wrapper for this function \code{modify_header()}.
 }
-\examples{
-create_header(
-  data = mtcars,
-  stat_overall = c("Overall", "N = {N}"),
-  pvalue = c("p-value", "")
-)
-create_header(
-  data = mtcars, by = "am",
-  stat_by = c("{level}", "N = {n}"),
-  label = c("Variables", "")
-)
-}
 \keyword{internal}
