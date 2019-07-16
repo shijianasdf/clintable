@@ -13,10 +13,13 @@
 #' @return Vector summary types `c("continuous", "categorical", "dichotomous")`.
 #' @keywords internal
 #' @examples
-#' # assign_summary_type(data = mtcars,
-#' #                     variable =  names(mtcars),
-#' #                     class = apply(mtcars, 2, class),
-#' #                     summary_type = NULL)
+#' gtsummary:::assign_summary_type(
+#'   data = mtcars,
+#'   variable =  names(mtcars),
+#'   class = apply(mtcars, 2, class),
+#'   summary_type = NULL
+#' )
+
 assign_summary_type <- function(data, variable, class, summary_type) {
   purrr::map2_chr(
     variable, class,
@@ -54,7 +57,7 @@ assign_summary_type <- function(data, variable, class, summary_type) {
 
 
 # n = 50
-# dta = dplyr::data_frame(
+# dta = tibble::tibble(
 #   age = rnorm(n) + 35,
 #   female = sample(c(T, F), size = n, replace = T),
 #   male = as.numeric(female),
@@ -73,7 +76,7 @@ assign_summary_type <- function(data, variable, class, summary_type) {
 #
 # # creating base meta data dataframe
 # meta_data =
-#   dplyr::data_frame(
+#   tibble::tibble(
 #     variable = names(dta),
 #     class = purrr::map_chr(variable, ~ class(dta[[.x]]))
 #   )

@@ -15,23 +15,24 @@ indent_key <- function(x, ...) UseMethod("indent_key")
 #' @param ...	further arguments passed to or from other methods
 #' @export
 #' @examples
-#' \dontrun{
-#' t1 <- trial %>%
-#'   fmt_table1() %>%
-#'   bold_labels()
-#' 
-#' knitr::kable(as_tibble(t1),
-#'   row.names = FALSE,
-#'   caption = "Table 1: Summary of Patient and Clinical Variables"
-#' ) %>%
-#'   kableExtra::kable_styling(
-#'     bootstrap_options = c("condensed"),
-#'     font_size = 11,
-#'     full_width = F
+#' \donttest{
+#'   t1 <-
+#'     trial %>%
+#'     fmt_table1() %>%
+#'     bold_labels()
+#'
+#'   knitr::kable(as_tibble(t1),
+#'     row.names = FALSE,
+#'     caption = "Table 1: Summary of Patient and Clinical Variables"
 #'   ) %>%
-#'   kableExtra::add_indent(indent_key(t1))
+#'     kableExtra::kable_styling(
+#'       bootstrap_options = c("condensed"),
+#'       font_size = 11,
+#'       full_width = F
+#'     ) %>%
+#'     kableExtra::add_indent(indent_key(t1))
 #' }
-#' 
+#'
 indent_key.fmt_table1 <- function(x, ...) {
   key <- which(x$table1$row_type %in% c("level", "missing")) - 1
   return(key)
@@ -45,27 +46,27 @@ indent_key.fmt_table1 <- function(x, ...) {
 #' @param ...	further arguments passed to or from other methods
 #' @export
 #' @examples
-#' \dontrun{
-#' library(lme4)
-#' mod_glmer <- glmer(am ~ hp + +wt + factor(cyl) + (1 | gear), mtcars, family = binomial)
-#' tglmer <- fmt_regression(mod_glmer, exponentiate = TRUE)
-#' 
-#' # In RMarkdown, knitting to HTML:
-#' knitr::kable(as_tibble(tglmer),
-#'   row.names = FALSE,
-#'   caption = "Model Summary"
-#' ) %>%
-#'   kableExtra::kable_styling(
-#'     bootstrap_options = c("striped", "condensed"),
-#'     font_size = 11,
-#'     full_width = F
+#' \donttest{
+#'   library(lme4)
+#'   mod_glmer <- glmer(am ~ hp + +wt + factor(cyl) + (1 | gear), mtcars, family = binomial)
+#'   tglmer <- fmt_regression(mod_glmer, exponentiate = TRUE)
+#'
+#'   # In RMarkdown, knitting to HTML:
+#'   knitr::kable(as_tibble(tglmer),
+#'     row.names = FALSE,
+#'     caption = "Model Summary"
 #'   ) %>%
-#'   kableExtra::add_indent(indent_key(tglmer)) %>%
-#'   kableExtra::footnote(general = "Model coefficients and p-values calculated using
-#' generalized linear mixed model, with random intercept specified
-#' as gear type.")
+#'     kableExtra::kable_styling(
+#'       bootstrap_options = c("striped", "condensed"),
+#'       font_size = 11,
+#'       full_width = F
+#'     ) %>%
+#'     kableExtra::add_indent(indent_key(tglmer)) %>%
+#'     kableExtra::footnote(general = "Model coefficients and p-values calculated using
+#'   generalized linear mixed model, with random intercept specified
+#'   as gear type.")
 #' }
-#' 
+#'
 indent_key.fmt_regression <- function(x, ...) {
   key <- which(x$model_tbl$row_type %in% c("level", "missing")) - 1
   return(key)
@@ -78,23 +79,23 @@ indent_key.fmt_regression <- function(x, ...) {
 #' @param ...	further arguments passed to or from other methods
 #' @export
 #' @examples
-#' \dontrun{
-#' library(lme4)
-#' uni_mod <- fmt_uni_regression(trial,
-#'   method = "glm",
-#'   y = "response",
-#'   method.args = list(family = binomial),
-#'   exponentiate = TRUE
-#' )
-#' 
-#' # In RMarkdown, knitting to HTML:
-#' kable(as_tibble(uni_mod),
-#'   row.names = FALSE,
-#'   caption = "Model Summary"
-#' ) %>%
-#'   kableExtra::add_indent(indent_key(uni_mod))
+#' \donttest{
+#'   library(lme4)
+#'   uni_mod <- fmt_uni_regression(trial,
+#'     method = "glm",
+#'     y = "response",
+#'     method.args = list(family = binomial),
+#'     exponentiate = TRUE
+#'   )
+#'
+#'   # In RMarkdown, knitting to HTML:
+#'   kable(as_tibble(uni_mod),
+#'     row.names = FALSE,
+#'     caption = "Model Summary"
+#'   ) %>%
+#'     kableExtra::add_indent(indent_key(uni_mod))
 #' }
-#' 
+#'
 indent_key.fmt_uni_regression <- function(x, ...) {
   key <- which(x$model_tbl$row_type %in% c("level", "missing")) - 1
   return(key)

@@ -61,13 +61,13 @@ parse_terms <- function(x, tidy_model, show_yesno) {
     else {
       # making dataframe of the terms
       fct_terms <-
-        dplyr::data_frame(
+        tibble::tibble(
           level = stats::model.frame(x)[[v]] %>% unique()
         ) %>%
-        dplyr::mutate_(
-          term = ~ paste0(v, level)
+        dplyr::mutate(
+          term = paste0(v, .data$level)
         ) %>%
-        dplyr::arrange_("level") %>%
+        dplyr::arrange(.data$level) %>%
         dplyr::select("term")
 
       # checking that these new terms match any terms in model

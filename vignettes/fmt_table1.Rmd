@@ -50,13 +50,13 @@ We'll be using the `trial` data set throughout this example.  This set contains 
 library(dplyr)
 library(knitr)
 library(kableExtra)
-library(clintable)
+library(gtsummary)
 
 # printing trial data
 head(trial) %>% kable()
 ```
 
-The default output from `fmt_table1()` is meant to be publication ready.  Let's start by creating a descriptive statistics table from the `trial` data set built into the `clintable` package.  The `fmt_table1()` can take, minimally, a data set as the only input, and return descriptive statistics for each column in the data frame.
+The default output from `fmt_table1()` is meant to be publication ready.  Let's start by creating a descriptive statistics table from the `trial` data set built into the `gtsummary` package.  The `fmt_table1()` can take, minimally, a data set as the only input, and return descriptive statistics for each column in the data frame.
 
 For brevity, keeping a subset of the variables in the trial data set.
 
@@ -165,7 +165,7 @@ The `cell` argument indicates to `inline_text()` which statistic to display.  In
 inline_text(tab1, "stage:T1:Drug")` `` resolves to "`r inline_text(tab1, "stage:T1:Drug")`"
 
 
-## clintable + kableExtra
+## gtsummary + kableExtra
 
 Need a data frame for any reason (e.g. if you want to get extra fancy with `kableExtra`)? Use generic function `as_tibble` to extract an easy-to-use data frame from any `fmt_table1` object. 
 
@@ -174,7 +174,7 @@ Need a data frame for any reason (e.g. if you want to get extra fancy with `kabl
 tab1_df <- as_tibble(tab1)
 ```
 
-If you want to customize anything with `knitr::kable` or [`kableExtra`](https://cran.r-project.org/package=kableExtra), you can use the above `as_tibble` along with the function `indent_key` which extracts the row numbers you want indented when knitting your table to HTML. (NOTE: Only load `library(kableExtra)` and use the below if knitting to HTML, this will not work with Word or PDF.)  For more on customizing your tables with `kableExtra` check out the package's [vignette on HTML output](https://haozhu233.github.io/kableExtra/awesome_table_in_html.html).
+If you want to customize anything with `knitr::kable` or [`kableExtra`](https://CRAN.R-project.org/package=kableExtra), you can use the above `as_tibble` along with the function `indent_key` which extracts the row numbers you want indented when knitting your table to HTML. (NOTE: Only load `library(kableExtra)` and use the below if knitting to HTML, this will not work with Word or PDF.)  For more on customizing your tables with `kableExtra` check out the package's [vignette on HTML output](https://haozhu233.github.io/kableExtra/awesome_table_in_html.html).
 
 ```{r, message=FALSE}
 # knit pretty table
@@ -197,7 +197,7 @@ tab1 %>%
     general = "Isn't this footnote so nice?",
     number = c("You can also add numbered or lettered footnotes", "Which is great.")
   ) %>%
-  add_indent(indent_key(tab1)) #indent_key() is a clintable function!
+  add_indent(indent_key(tab1)) 
 ```
 
 ## Under the Hood

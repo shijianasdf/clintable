@@ -49,7 +49,7 @@ assign_test_one <- function(data, var, var_summary_type, by_var, test, id) {
   # calculate expected counts
   min_exp <-
     expand.grid(table(data[[var]]), table(data[[by_var]])) %>%
-    dplyr::mutate_(exp = ~ Var1 * Var2 /
+    dplyr::mutate(exp = .data$Var1 * .data$Var2 /
       sum(table(data[[var]], data[[by_var]]))) %>%
     dplyr::pull(exp) %>%
     min()

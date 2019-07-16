@@ -36,8 +36,7 @@ in the output.  Default is \code{FALSE}}
 }
 \description{
 This function uses \code{broom::tidy} from the \code{broom} or \code{broom.mixed} packages
-to perform the initial model formatting. Review the \code{fmt_regression}
-\href{http://www.danieldsjoberg.com/clintable/articles/fmt_regression.html}{vignette}
+to perform the initial model formatting. Review the \code{fmt_regression} vignette
 for detailed examples.
 }
 \examples{

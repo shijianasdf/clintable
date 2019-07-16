@@ -54,9 +54,8 @@ Data frame including formatted descriptive statistics.
 }
 \description{
 The \code{fmt_table1} function calculates descriptive statistics by groups for
-continuous, categorical, and dichotomous variables.  Review the
-\href{https://github.mskcc.org/pages/datadojo/biostatR/articles/fmt_table1.html}{\code{fmt_table1} vignette}
-for detailed examples.
+continuous, categorical, and dichotomous variables.  Review the \code{fmt_table1}
+vignette for detailed examples.
 }
 \examples{
 fmt_table1(trial, by = "trt")

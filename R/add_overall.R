@@ -25,7 +25,7 @@ add_overall <- function(x, last = FALSE) {
 
   # calculating stats overall, and adding header row
   header_n <- x$table1 %>%
-    dplyr::filter_("startsWith(row_type, 'header')") %>%
+    dplyr::filter(startsWith(.data$row_type, 'header')) %>%
     dplyr::pull("row_type") %>%
     length()
   if (header_n < 2) {
@@ -47,10 +47,10 @@ add_overall <- function(x, last = FALSE) {
   if (!identical(
     x$table1 %>%
       dplyr::select(dplyr::one_of(c("row_type", ".variable", "label"))) %>%
-      dplyr::filter_("!startsWith(row_type, 'header')"),
+      dplyr::filter(!startsWith(.data$row_type, 'header')),
     overall %>%
       dplyr::select(dplyr::one_of(c("row_type", ".variable", "label"))) %>%
-      dplyr::filter_("!startsWith(row_type, 'header')")
+      dplyr::filter(!startsWith(.data$row_type, 'header'))
   )) {
     stop("An error occured in 'add_overall()'")
   }

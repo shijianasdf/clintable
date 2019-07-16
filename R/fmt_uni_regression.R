@@ -1,9 +1,7 @@
 #' Creates table of univariate regression results
 #'
 #' The `fmt_uni_regression` function arguments are similar to the \code{\link{fmt_regression}}
-#' arguments. Review the `fmt_uni_regression`
-#' \href{http://www.danieldsjoberg.com/clintable/articles/fmt_regression.html#fmt_uni_regression}{vignette}
-#' for detailed examples.
+#' arguments. Review the `fmt_uni_regression` vignette for detailed examples.
 #'
 #' @param data Data frame to be used in univariate regression modeling.  Data frame
 #' includes the outcome variable(s) and the independent variables.
@@ -123,13 +121,13 @@ fmt_uni_regression <- function(data, method, y, method.args = NULL,
   # creating a meta_data table (this will be used in subsequent functions, eg add_global)
   meta_data <-
     model_tbl %>%
-    dplyr::filter_(~ row_type == "label") %>%
+    dplyr::filter(.data$row_type == "label") %>%
     dplyr::select(c("variable", "var_type", "label", "N")) %>%
-    dplyr::mutate_(
-      N_levels = ~ purrr::map2_int(
-        variable, var_type,
+    dplyr::mutate(
+      N_levels = purrr::map2_int(
+        .data$variable, .data$var_type,
         ~ ifelse(..2 == "categorical",
-          model_tbl %>% dplyr::filter_(~ variable == ..1 & row_type == "level") %>% nrow(),
+          model_tbl %>% dplyr::filter(.data$variable == ..1 & .data$row_type == "level") %>% nrow(),
           NA_integer_
         )
       )
@@ -140,11 +138,11 @@ fmt_uni_regression <- function(data, method, y, method.args = NULL,
   header_n <- as.numeric(gsub("[[:alpha:]]", "", model_tbl$row_type[1]))
   model_tbl <-
     model_tbl %>%
-    dplyr::filter_(~ !startsWith(row_type, "header") | dplyr::row_number() <= header_n) %>%
-    dplyr::mutate_(
-      N = ~ dplyr::case_when(
-        row_type == "label" ~ N %>% as.character(),
-        row_type == "header1" ~ "N",
+    dplyr::filter(!startsWith(.data$row_type, "header") | dplyr::row_number() <= header_n) %>%
+    dplyr::mutate(
+      N = dplyr::case_when(
+        .data$row_type == "label" ~ N %>% as.character(),
+        .data$row_type == "header1" ~ "N",
         TRUE ~ NA_character_
       )
     )

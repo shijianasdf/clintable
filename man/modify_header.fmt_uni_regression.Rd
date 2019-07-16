@@ -26,3 +26,13 @@
 If the top row of a header column is blank,
 you may experience printing issues when using \code{knitr}::\code{\link[knitr]{kable}}
 }
+\examples{
+fmt_uni_regression(
+  trial,
+  method = "glm",
+  y = "response",
+  method.args = list(family = binomial),
+  exponentiate = TRUE
+) \%>\%
+  modify_header(label = "Characteristic")
+}

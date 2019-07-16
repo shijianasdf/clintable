@@ -26,9 +26,11 @@ call of \code{fmt_table1}, \code{assign_summary_type} assigns a type based on cl
 number of unique levels.
 }
 \examples{
-# assign_summary_type(data = mtcars,
-#                     variable =  names(mtcars),
-#                     class = apply(mtcars, 2, class),
-#                     summary_type = NULL)
+gtsummary:::assign_summary_type(
+  data = mtcars,
+  variable =  names(mtcars),
+  class = apply(mtcars, 2, class),
+  summary_type = NULL
+)
 }
 \keyword{internal}

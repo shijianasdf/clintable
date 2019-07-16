@@ -1,9 +1,9 @@
 #' Italicize variable levels in Rmarkdown
 #'
-#' Italicize variable levels in `biostatR` objects by adding '_'
+#' Italicize variable levels by adding '_'
 #' to each side of the string
 #'
-#' @param x `biostatR` object
+#' @param x summary object
 #' @param ... further arguments passed to or from other methods.
 #' @seealso \code{\link{italicize_levels.fmt_table1}},
 #' \code{\link{italicize_levels.fmt_regression}},

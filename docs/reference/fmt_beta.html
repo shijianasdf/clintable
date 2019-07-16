@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Round and format regression model coefficients — fmt_beta • clintable</title>
+<title>Round and format regression model coefficients — fmt_beta • gtsummary</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -34,7 +34,7 @@
 
 <meta property="og:description" content="Takes in a vector of regression model coefficients, and returns a
 rounded and formatted coefficient vector.  This is the default
-rounding for models formatted with biostatR::fmt_regression().  Coefficients
+rounding for models formatted with fmt_regression().  Coefficients
 larger than 100 are rounded to the nearest integer, between  10 and 100 to one
 decimal place, and all others to 2 decimal places.  These thresholds were
 selected with odds ratios and hazard ratios in mind." />
@@ -67,8 +67,8 @@ selected with odds ratios and hazard ratios in mind." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">clintable</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <a class="navbar-link" href="../index.html">gtsummary</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -131,7 +131,7 @@ selected with odds ratios and hazard ratios in mind." />
     
     <p>Takes in a vector of regression model coefficients, and returns a
 rounded and formatted coefficient vector.  This is the default
-rounding for models formatted with <code>biostatR::fmt_regression()</code>.  Coefficients
+rounding for models formatted with <code><a href='fmt_regression.html'>fmt_regression()</a></code>.  Coefficients
 larger than 100 are rounded to the nearest integer, between  10 and 100 to one
 decimal place, and all others to 2 decimal places.  These thresholds were
 selected with odds ratios and hazard ratios in mind.</p>

@@ -109,9 +109,6 @@
     <loc>https://github.com/ddsjoberg/clintable/reference/calculate_summary_stat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/ddsjoberg/clintable/reference/clintable-package.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/ddsjoberg/clintable/reference/continuous_digits_guess.html</loc>
   </url>
   <url>
@@ -143,6 +140,9 @@
   </url>
   <url>
     <loc>https://github.com/ddsjoberg/clintable/reference/grapes-T-greater-than-grapes.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/ddsjoberg/clintable/reference/gtsummary-package.html</loc>
   </url>
   <url>
     <loc>https://github.com/ddsjoberg/clintable/reference/indent_key.fmt_regression.html</loc>

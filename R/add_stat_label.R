@@ -61,8 +61,8 @@ add_stat_label <- function(x, iqr = TRUE) {
   # adding some meta data only needed for merging (i.e. the row_type)
   meta_data_stat_label <-
     x$meta_data %>%
-    dplyr::mutate_(
-      row_type = ~ ifelse(.summary_type == "categorical", "level", "label")
+    dplyr::mutate(
+      row_type = ifelse(.data$.summary_type == "categorical", "level", "label")
     ) %>%
     dplyr::select(dplyr::one_of(c(".variable", "row_type", "stat_label")))
 
@@ -75,12 +75,12 @@ add_stat_label <- function(x, iqr = TRUE) {
 
   x$table1 <-
     x$table1 %>%
-    dplyr::mutate_(
+    dplyr::mutate(
       # adding in "n" for missing rows, and header
-      stat_label = ~ dplyr::case_when(
-        row_type == "missing" ~ "n",
-        row_type == "header1" & is.null(x[["by"]]) ~ "Statistic",
-        row_type == "header2" & !is.null(x[["by"]]) ~ "Statistic",
+      stat_label = dplyr::case_when(
+        .data$row_type == "missing" ~ "n",
+        .data$row_type == "header1" & is.null(x[["by"]]) ~ "Statistic",
+        .data$row_type == "header2" & !is.null(x[["by"]]) ~ "Statistic",
         TRUE ~ stat_label
       )
     )

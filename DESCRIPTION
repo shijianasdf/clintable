@@ -1,18 +1,23 @@
-Package: clintable
-Title: The goal of clintable is to make reporting of tabular
-    analytic results easy, beautiful, and reproducible
-Version: 0.0.0.9000
+Package: gtsummary
+Title: Presentation-Ready Data Summary Tables
+Version: 0.1.0.9000
 Authors@R: 
-    person(given = "Daniel D.",
-           family = "Sjoberg",
-           role = c("aut", "cre"),
-           email = "danieldsjoberg@gmail.com")
-Description: Written with the goal to make reporting of tabular
-    analytic results simple, beautiful, and reproducible.
-    Publication-ready tables are created with minimal code, and can be
-    exported to Word, HTML, and PDF documents with the use of Rmarkdown.
-    The clintable functions are flexible, allowing you to easily customize
-    the aesthetics of tables to suit your needs.
+    c(person(given = "Daniel D.",
+             family = "Sjoberg",
+             role = c("aut", "cre"),
+             email = "danield.sjoberg@gmail.com"),
+      person(given = "Emily C.",
+             family = "Zabor",
+             role = "aut"))
+Description: Creates
+    presentation-ready tables summarizing data sets, regression models,
+    and more. The code to create the tables is concise and highly
+    customizable. Data frames can be summarized with many types
+    of statistics presented in any pattern. 
+    Regression models are summarized including the reference row for
+    categorical independent variables. Function defaults follow
+    reporting guidelines outlined in Assel, Sjoberg, et al. (2019) 
+    <doi:10.1016/j.eururo.2018.12.014>.
 License: MIT + file LICENSE
 Depends: 
     R (>= 3.4)
@@ -36,7 +41,7 @@ Suggests:
     kableExtra (>= 0.9.0),
     lme4 (>= 1.1.18.1),
     rmarkdown (>= 1.11),
-    spelling,
+    spelling (>= 2.1),
     survival,
     testthat (>= 2.0.0)
 VignetteBuilder: 

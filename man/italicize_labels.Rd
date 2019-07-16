@@ -7,12 +7,12 @@
 italicize_labels(x, ...)
 }
 \arguments{
-\item{x}{\code{biostatR} object}
+\item{x}{summary object}
 
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-Italicize variable labels in \code{biostatR} objects by adding '_'
+Italicize variable labels by adding '_'
 to each side of the string
 }
 \seealso{
